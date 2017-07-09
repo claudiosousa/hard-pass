@@ -4,6 +4,5 @@
 #include <TouchScreen.h>
 
 MCUFRIEND_kbv& buildTFT();
-TouchScreen& buildTouchScreen();
 
 #endif

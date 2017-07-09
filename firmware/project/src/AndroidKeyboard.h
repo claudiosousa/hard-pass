@@ -6,6 +6,7 @@
 class Keyboard {
    public:
     void draw();
+    char getPressedTouch();
 };
 
 #endif

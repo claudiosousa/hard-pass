@@ -18,12 +18,4 @@ MCUFRIEND_kbv& buildTFT() {
 #include <Adafruit_TFTLCD.h>  // Hardware-specific library
 Adafruit_TFTLCD tft(LCD_CS, LCD_CD, LCD_WR, LCD_RD, LCD_RESET);
 #endif
-#include <TouchScreen.h>
-#define YP A3
-#define XM A2
-#define YM 9
-#define XP 8
-TouchScreen& buildTouchScreen() {
-    TouchScreen* ts = new TouchScreen(XP, YP, XM, YM, 300);
-    return *ts;
-}
+
