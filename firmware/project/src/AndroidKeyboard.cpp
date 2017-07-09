@@ -89,8 +89,19 @@ void drawKeyPos(int x, int y, bool active = false) {
                 KEYBOARD_FIXED_KEYS_SIZE[y][2], padding, bg);
     }
 }
+void drawTextBox(){
+    tft.setTextSize(2);
+    tft.setTextColor(ANDROID_KB_BG);
+    tft.fillRoundRect(5, 30, 310, 30, 3, ANDROID_KB_WHITE);  // Button Shading
+    tft.setCursor(10, 38);
+    //tft.print("********************");
+    tft.print("*******");
+}
 
 void drawKeyboard(const char type[3][12]) {
+
+    drawTextBox();
+
     tft.setTextSize(2);
     tft.setTextColor(ANDROID_KB_WHITE);
     for (int y = 0; y < 3; y++) {
