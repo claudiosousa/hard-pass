@@ -27,5 +27,3 @@ TouchScreen& buildTouchScreen() {
     TouchScreen* ts = new TouchScreen(XP, YP, XM, YM, 300);
     return *ts;
 }
-
-int RS, int WR,int CS, int RST, int RD = A0

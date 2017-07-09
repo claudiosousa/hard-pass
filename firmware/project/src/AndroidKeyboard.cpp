@@ -1,6 +1,7 @@
-#include "GreyKeyboard.h"
 #include <MCUFRIEND_kbv.h>
+#include <TouchScreen.h>
 #include <avr/pgmspace.h>
+#include "AndroidKeyboard.h"
 #include "TFT.h"
 #include "colors.h"
 
@@ -10,10 +11,10 @@
 #define BUTTON_BACKGROUND ANDROID_KB_KEY
 #define BUTTON_SPECIAL_BACKGROUND ANDROID_KB_SPECIAL_KEY
 
-static const int KEY_TEXT_LPADDING = 11;
+static const int KEY_TEXT_LPADDING = 10;
 static const int KEY_TEXT_TPADDING = 11;
 static const int KEY_HEIGHT = 36;
-static const int KEY_WIDTH = 30;
+static const int KEY_WIDTH = 29;
 static const int KEY_OUTER_WIDTH = 32;
 static const int KEY_OUTER_HEIGHT = 40;
 static const int KEYBOARD_LMARGIN = 1;
@@ -27,12 +28,11 @@ static const char KEYBOARD_LETTERS[3][12] PROGMEM = {
 };
 
 static const int KEYBOARD_FIXED_KEYS_SIZE[5][3] = {
-    {KEYBOARD_LMARGIN, KEYBOARD_TOP + KEY_OUTER_HEIGHT * 2, KEY_OUTER_WIDTH * 1.5 - 2},
-    {KEYBOARD_LMARGIN, KEYBOARD_TOP + KEY_OUTER_HEIGHT * 3, KEY_OUTER_WIDTH * 1.5 - 2},
-    {8.5 * KEY_OUTER_WIDTH + KEYBOARD_LMARGIN, KEYBOARD_TOP + KEY_OUTER_HEIGHT * 2, KEY_OUTER_WIDTH * 1.5 - 2},
-    {8.5 * KEY_OUTER_WIDTH + KEYBOARD_LMARGIN, KEYBOARD_TOP + KEY_OUTER_HEIGHT * 3, KEY_OUTER_WIDTH * 1.5 - 2},
-    {KEY_OUTER_WIDTH * 1.5 + KEYBOARD_LMARGIN, KEYBOARD_TOP + KEY_OUTER_HEIGHT * 3, KEY_OUTER_WIDTH * 6 + KEY_WIDTH},
-};
+    {KEYBOARD_LMARGIN, KEYBOARD_TOP + KEY_OUTER_HEIGHT * 2, KEY_OUTER_WIDTH * 1.5 - 3},
+    {KEYBOARD_LMARGIN, KEYBOARD_TOP + KEY_OUTER_HEIGHT * 3, KEY_OUTER_WIDTH * 1.5 - 3},
+    {8.5 * KEY_OUTER_WIDTH + KEYBOARD_LMARGIN, KEYBOARD_TOP + KEY_OUTER_HEIGHT * 2, KEY_OUTER_WIDTH * 1.5 - 3},
+    {8.5 * KEY_OUTER_WIDTH + KEYBOARD_LMARGIN, KEYBOARD_TOP + KEY_OUTER_HEIGHT * 3, KEY_OUTER_WIDTH * 1.5 - 3},
+    {KEY_OUTER_WIDTH * 1.5 + KEYBOARD_LMARGIN, KEYBOARD_TOP + KEY_OUTER_HEIGHT * 3, KEY_OUTER_WIDTH * 6 + KEY_WIDTH}};
 
 // const char Mobile_kb[3][12] PROGMEM = {
 //   {0, 10, 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p'},
@@ -53,9 +53,10 @@ static const int KEYBOARD_FIXED_KEYS_SIZE[5][3] = {
 //};
 
 MCUFRIEND_kbv& tft = buildTFT();
+TouchScreen& ts = buildTouchScreen();
 void drawButton(const int x, const int y, const int w, const int h, int bg) {
-    tft.fillRoundRect(x, y + 2, w, h, 4, BUTTON_SHADOW);  // Button Shading
-    tft.fillRoundRect(x, y, w, h - 2, 4, bg);             // inner button color
+    tft.fillRoundRect(x, y, w, h, 3, BUTTON_SHADOW);  // Button Shading
+    tft.fillRoundRect(x, y, w, h - 2, 3, bg);         // inner button color
 }
 
 void drawKey(const int x, const int y, const char* c, const int w = KEY_WIDTH, const int lpad = KEY_TEXT_LPADDING,
