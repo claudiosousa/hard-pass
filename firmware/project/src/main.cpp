@@ -13,7 +13,7 @@ void setup() {
 }
 
 void loop() {
-  char *enteredText = kb.processKeys();
+  char* enteredText = kb.processKeys();
   if (enteredText)
     Serial.print("Submited text :" + String(enteredText) + "\n");
 }

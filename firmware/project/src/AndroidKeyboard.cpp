@@ -13,32 +13,35 @@
 
 #define KEY_PRESS_HIGHLIGHT_DEBOUNCE 100
 
-static const int KEY_TEXT_LPADDING = 10;
-static const int KEY_TEXT_TPADDING = 11;
-static const int KEY_HEIGHT = 36;
-static const int KEY_WIDTH = 29;
-static const int KEY_OUTER_WIDTH = 32;
-static const int KEY_OUTER_HEIGHT = 40;
-static const int KEYBOARD_LMARGIN = 1;
-static const int KEYBOARD_TOP = 83;
+const int KEY_TEXT_LPADDING = 10;
+const int KEY_TEXT_TPADDING = 11;
+const int KEY_HEIGHT = 36;
+const int KEY_WIDTH = 29;
+const int KEY_OUTER_WIDTH = 32;
+const int KEY_OUTER_HEIGHT = 40;
+const int KEYBOARD_LMARGIN = 1;
+const int KEYBOARD_TOP = 83;
 
-static const int KEYBOARD_TB_SIZE[4] = {5, 30, 310, 30}; // x, y, w, h
+const int KEYBOARD_TB_SIZE[4] = {5, 30, 310, 30};  // x, y, w, h
 
-static const int KEYBOARD_TB_TEXT_SPACE[3] = {5, 8, 13}; // lpad, tpad, width
+const int KEYBOARD_TB_TEXT_SPACE[3] = {5, 8, 13};  // lpad, tpad, width
 
 const char MAX_TEXT_LENGTH = 23;
 char enteredText[MAX_TEXT_LENGTH];
 char currentTextLegth = 0;
 
-static const bool USB_CABLE_RIGHT = true;
+const bool USB_CABLE_RIGHT = true;
 
-static const char KEYBOARD_LETTERS[3][12] PROGMEM = {
+bool shiftPressed = false;
+bool symbolsPressed = false;
+
+const char KEYBOARD_LETTERS[3][12] PROGMEM = {
     {0, 10, 'Q', 'W', 'E', 'R', 'T', 'Z', 'U', 'I', 'O', 'P'},
     {1, 9, 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L'},
     {3, 7, 'Y', 'X', 'C', 'V', 'B', 'N', 'M'},
 };
 
-static const int KEYBOARD_FIXED_KEYS_SIZE[5][3] = {
+const int KEYBOARD_FIXED_KEYS_SIZE[5][3] = {
     {KEYBOARD_LMARGIN, KEYBOARD_TOP + KEY_OUTER_HEIGHT * 2,
      KEY_OUTER_WIDTH * 1.5 - 3},
     {KEYBOARD_LMARGIN, KEYBOARD_TOP + KEY_OUTER_HEIGHT * 3,
@@ -50,7 +53,7 @@ static const int KEYBOARD_FIXED_KEYS_SIZE[5][3] = {
     {KEY_OUTER_WIDTH * 1.5 + KEYBOARD_LMARGIN,
      KEYBOARD_TOP + KEY_OUTER_HEIGHT * 3, KEY_OUTER_WIDTH * 6 + KEY_WIDTH}};
 
-static const char *KEYBOARD_FIXED_KEYS_LETTERS[5] = {"^", "#", "<-", "OK", ""};
+const char* KEYBOARD_FIXED_KEYS_LETTERS[5] = {"^", "#", "<-", "OK", ""};
 
 // const char Mobile_kb[3][12] PROGMEM = {
 //   {0, 10, 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p'},
@@ -70,26 +73,29 @@ static const char *KEYBOARD_FIXED_KEYS_LETTERS[5] = {"^", "#", "<-", "OK", ""};
 //   {5, 5, '.', ',', '?', '!', '\''}
 //};
 
-MCUFRIEND_kbv &tft = buildTFT();
+MCUFRIEND_kbv& tft = buildTFT();
 
 void drawButton(const int x, const int y, const int w, const int h, int bg) {
-  tft.fillRoundRect(x, y, w, h, 3, BUTTON_SHADOW); // Button Shading
-  tft.fillRoundRect(x, y, w, h - 2, 3, bg);        // inner button color
+  tft.fillRoundRect(x, y, w, h, 3, BUTTON_SHADOW);  // Button Shading
+  tft.fillRoundRect(x, y, w, h - 2, 3, bg);         // inner button color
 }
 
-void drawKey(const int x, const int y, const char *c, const int w = KEY_WIDTH,
+void drawKey(const int x,
+             const int y,
+             const char* c,
+             const int w = KEY_WIDTH,
              const int lpad = KEY_TEXT_LPADDING,
-             const int bg = BUTTON_BACKGROUND) {
+             const int bg = BUTTON_BACKGROUND,
+             const int fg = ANDROID_KB_WHITE) {
   drawButton(x, y, w, KEY_HEIGHT, bg);
   tft.setCursor(x + lpad, y + KEY_TEXT_TPADDING);
+  tft.setTextColor(fg);
   tft.print(c);
 }
 
 void drawKeyPos(int x, int y, bool active = false) {
-  tft.setTextColor(ANDROID_KB_WHITE);
-
   int bg = active ? ANDROID_KB_ACTIVE : BUTTON_BACKGROUND;
-
+  int fg = ANDROID_KB_WHITE;
   if (y >= 0) {
     int shiftRight =
         KEYBOARD_LMARGIN +
@@ -103,17 +109,24 @@ void drawKeyPos(int x, int y, bool active = false) {
     y = -y - 1;
 
     int padding = y < 2 ? 17 : KEY_TEXT_LPADDING;
-    if (y < 4 && bg == BUTTON_BACKGROUND)
+
+    if (y < 4 && bg == BUTTON_BACKGROUND) {
       bg = y == 3 ? ANDROID_KB_RETURN : BUTTON_SPECIAL_BACKGROUND;
+    }
+    if (y == 0 && shiftPressed || y == 1 && symbolsPressed) {
+      fg = BUTTON_BACKGROUND;
+      bg = ANDROID_KB_WHITE;
+    }
+
     drawKey(KEYBOARD_FIXED_KEYS_SIZE[y][0], KEYBOARD_FIXED_KEYS_SIZE[y][1],
             KEYBOARD_FIXED_KEYS_LETTERS[y], KEYBOARD_FIXED_KEYS_SIZE[y][2],
-            padding, bg);
+            padding, bg, fg);
   }
 }
 void drawTextBox() {
   tft.fillRoundRect(KEYBOARD_TB_SIZE[0], KEYBOARD_TB_SIZE[1],
                     KEYBOARD_TB_SIZE[2], KEYBOARD_TB_SIZE[3], 3,
-                    ANDROID_KB_WHITE); // Button Shading
+                    ANDROID_KB_WHITE);  // Button Shading
 }
 
 void resetText() {
@@ -122,7 +135,6 @@ void resetText() {
 }
 
 void drawKeyboard(const char type[3][12]) {
-
   drawTextBox();
 
   tft.setTextSize(2);
@@ -145,8 +157,12 @@ void Keyboard::draw() {
   drawKeyboard(KEYBOARD_LETTERS);
 }
 
-bool isInButton(const int x, const int y, const int w, const int h,
-                const int tx, const int ty) {
+bool isInButton(const int x,
+                const int y,
+                const int w,
+                const int h,
+                const int tx,
+                const int ty) {
   return tx >= x && tx <= x + w && ty >= y && ty <= y + h;
 }
 
@@ -216,7 +232,7 @@ void printTbChar(char c) {
   tft.print(c);
 }
 
-char *Keyboard::processKeys() {
+char* Keyboard::processKeys() {
   char key = getPressedTouch();
   if (!key)
     return NULL;
@@ -224,16 +240,39 @@ char *Keyboard::processKeys() {
   if (key < 5) {
     // TODO: handle special keys
 
-    if (key == 3 && currentTextLegth > 0) { // backspace
-      currentTextLegth--;
-      enteredText[currentTextLegth] = 0;
-      printTbChar(' ');
-    }
-    if (key == 4 && currentTextLegth > 0) { // OK
-      return enteredText;
+    switch (key) {
+      case 1:  // shift
+        shiftPressed = !shiftPressed;
+        drawKeyPos(0, -1);
+        if (symbolsPressed){
+            symbolsPressed = false;
+            drawKeyPos(0, -2);
+        }
+        break;
+      case 2:  // hash
+        symbolsPressed = !symbolsPressed;
+        drawKeyPos(0, -2);
+        if (shiftPressed){
+            shiftPressed = false;
+            drawKeyPos(0, -1);
+        }
+        break;
+      case 3:  // backspace
+        if (currentTextLegth > 0) {
+          currentTextLegth--;
+          enteredText[currentTextLegth] = 0;
+          printTbChar(' ');
+        }
+        break;
+      case 4:  // OK
+        if (currentTextLegth > 0) {
+          return enteredText;
+        }
+        break;
     }
     return NULL;
   }
+
   if (currentTextLegth == MAX_TEXT_LENGTH)
     return NULL;
   tft.setCursor(KEYBOARD_TB_SIZE[0] + KEYBOARD_TB_TEXT_SPACE[0] +
