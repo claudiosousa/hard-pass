@@ -229,6 +229,9 @@ char *Keyboard::processKeys() {
       enteredText[currentTextLegth] = 0;
       printTbChar(' ');
     }
+    if (key == 4 && currentTextLegth > 0) { // OK
+      return enteredText;
+    }
     return NULL;
   }
   if (currentTextLegth == MAX_TEXT_LENGTH)
