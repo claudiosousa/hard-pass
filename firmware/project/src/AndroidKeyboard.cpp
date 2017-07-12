@@ -224,6 +224,7 @@ char getPressedTouch() {
   lastTouch = res;
   return res;
 }
+
 void printTbChar(char c) {
   tft.setCursor(KEYBOARD_TB_SIZE[0] + KEYBOARD_TB_TEXT_SPACE[0] +
                     currentTextLegth * KEYBOARD_TB_TEXT_SPACE[2],
