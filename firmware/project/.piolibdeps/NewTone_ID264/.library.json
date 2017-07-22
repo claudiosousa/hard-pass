@@ -1,0 +1,27 @@
+{
+    "name": "NewTone", 
+    "repository": {
+        "url": "https://github.com/Antonded/NewTone.git", 
+        "type": "git"
+    }, 
+    "platforms": [
+        "atmelavr"
+    ], 
+    "frameworks": [
+        "arduino"
+    ], 
+    "version": "100a3ff4be", 
+    "authors": [
+        {
+            "maintainer": false, 
+            "name": "Antonded", 
+            "url": "https://github.com/Antonded", 
+            "email": null
+        }
+    ], 
+    "keywords": [
+        "tone"
+    ], 
+    "id": 264, 
+    "description": "NewTone library"
+}
