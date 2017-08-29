@@ -45,7 +45,33 @@ void sound_play(Melody* melody) {
     nextNotePos = 0;
 }
 
+int i = 0;
+
+void playNextDemoSound() {
+    if (!sound_isPlaying()) {
+        switch (i) {
+            case 1:
+                sound_play(&startSound);
+                break;
+            case 3:
+                sound_play(&gameOverSound);
+                break;
+            case 2:
+                sound_play(&winSound);
+                break;
+            case 0:
+                sound_play(&submitMoveSound);
+                break;
+        }
+        i++;
+        if (i == 4)
+            i = 0;
+    }
+}
+
 void sound_loop() {
+    //playNextDemoSound();
+
     if (!currentMelody)
         return;
 
