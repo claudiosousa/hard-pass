@@ -42,9 +42,15 @@ const char KEYBOARD_UPPER_CAPS[3][12] PROGMEM = {
 };
 
 const char KEYBOARD_LOWER_CAPS[3][12] PROGMEM = {
-    {0, 10, 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p'},
+    {0, 10, 'q', 'w', 'e', 'r', 't', 'z', 'u', 'i', 'o', 'p'},
     {1, 9, 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l'},
     {3, 7, 'y', 'x', 'c', 'v', 'b', 'n', 'm'},
+};
+
+const char KEYBOARD_SYMBOLS_CAPS[3][12] PROGMEM = {
+    {0, 10, '1', '2', '3', '4', '5', '6', '7', '8', '9', '0'},
+    {1, 9, '<', '>', '"', '/', '(', ')', '!', '=', '$'},
+    {3, 7, '\\', '+', '-', ';', ',', '.', '_'},
 };
 
 const int KEYBOARD_FIXED_KEYS_SIZE[5][3] = {
@@ -57,18 +63,6 @@ const int KEYBOARD_FIXED_KEYS_SIZE[5][3] = {
 const char* KEYBOARD_FIXED_KEYS_LETTERS[5] = {"^", "#", "<-", "OK", ""};
 
 char (*currentCaps)[12];
-
-// const char Mobile_NumKeys[3][12] PROGMEM = {
-//   {0, 10, '1', '2', '3', '4', '5', '6', '7', '8', '9', '0'},
-//   {0, 10, '-', '/', ':', ';', '(', ')', '$', '&', '@', '"'},
-//   {5, 5, '.', ',', '?', '!', '\''}
-// };
-
-// const char Mobile_SymKeys[3][12] PROGMEM = {
-//   {0, 10, '[', ']', '{', '}', '#', '%', '^', '*', '+', '='},
-//   {4, 6, '_', '\\', '|', '~', '<', '>'}, //4
-//   {5, 5, '.', ',', '?', '!', '\''}
-//};
 
 MCUFRIEND_kbv& tft = buildTFT();
 
@@ -122,7 +116,12 @@ void resetText() {
 }
 
 void drawKeyboard() {
-    drawTextBox();
+    if (shiftPressed)
+        currentCaps = (char(*)[12])KEYBOARD_UPPER_CAPS;
+    else if (symbolsPressed)
+        currentCaps = (char(*)[12])KEYBOARD_SYMBOLS_CAPS;
+    else
+        currentCaps = (char(*)[12])KEYBOARD_LOWER_CAPS;
 
     tft.setTextSize(2);
     for (int y = 0; y < 3; y++) {
@@ -140,9 +139,9 @@ void Keyboard::draw() {
     tft.fillScreen(BACKGROUND);
     tft.setRotation(USB_CABLE_RIGHT ? 3 : 1);
 
-    currentCaps = (char(*)[12])KEYBOARD_UPPER_CAPS;
-
     resetText();
+    drawTextBox();
+
     drawKeyboard();
 }
 
@@ -152,8 +151,8 @@ bool isInButton(const int x, const int y, const int w, const int h, const int tx
 
 char getPointTouch(const int point[2], int pos[2]) {
     for (int y = 0; y < 3; y++) {
-        int shiftRight = KEYBOARD_LMARGIN + KEY_OUTER_WIDTH / 2 * pgm_read_byte(&(KEYBOARD_UPPER_CAPS[y][0]));
-        int characters = pgm_read_byte(&(KEYBOARD_UPPER_CAPS[y][1]));
+        int shiftRight = KEYBOARD_LMARGIN + KEY_OUTER_WIDTH / 2 * pgm_read_byte(&(currentCaps[y][0]));
+        int characters = pgm_read_byte(&(currentCaps[y][1]));
         for (int x = 0; x < characters; x++) {
             if (!isInButton(KEY_OUTER_WIDTH * x + shiftRight, KEYBOARD_TOP + KEY_OUTER_HEIGHT * y, KEY_WIDTH,
                             KEY_HEIGHT, point[0], point[1]))
@@ -161,7 +160,7 @@ char getPointTouch(const int point[2], int pos[2]) {
 
             pos[0] = x;
             pos[1] = y;
-            return char(pgm_read_byte(&(KEYBOARD_UPPER_CAPS[y][x + 2])));
+            return char(pgm_read_byte(&(currentCaps[y][x + 2])));
         }
     }
     for (int y = 0; y < 5; y++) {
@@ -184,7 +183,7 @@ char getPressedTouch() {
     char res = 0;
     if (TouchManager_getPoint(point))
         res = getPointTouch(point, pos);
-    Serial.println(String(point[0]) + ":" + point[1]);
+
     unsigned long ms = millis();
     if (lastTouch && res != lastTouch) {
         if (res || (ms - lastTouchTime) > KEY_PRESS_HIGHLIGHT_DEBOUNCE) {
@@ -223,6 +222,7 @@ char* Keyboard::processKeys() {
         switch (key) {
             case 1:  // shift
                 shiftPressed = !shiftPressed;
+                drawKeyboard();
                 drawKeyPos(0, -1);
                 if (symbolsPressed) {
                     symbolsPressed = false;
@@ -231,11 +231,15 @@ char* Keyboard::processKeys() {
                 break;
             case 2:  // hash
                 symbolsPressed = !symbolsPressed;
-                drawKeyPos(0, -2);
+
                 if (shiftPressed) {
                     shiftPressed = false;
+                    drawKeyboard();
                     drawKeyPos(0, -1);
-                }
+                } else
+                    drawKeyboard();
+
+                drawKeyPos(0, -2);
                 break;
             case 3:  // backspace
                 if (currentTextLegth > 0) {

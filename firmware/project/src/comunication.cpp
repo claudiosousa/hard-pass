@@ -11,5 +11,5 @@ void communication_loop() {
     if (!Serial.available())
         return;
     String s = Serial.readStringUntil(TERMINATOR);
-    Serial.print(s + s + TERMINATOR);
+    Serial.print(s + TERMINATOR);
 }
