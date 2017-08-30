@@ -136,8 +136,8 @@ void drawKeyboard() {
 
 void Keyboard::draw() {
     tft.begin(0x9341);
-    tft.fillScreen(BACKGROUND);
     tft.setRotation(USB_CABLE_RIGHT ? 3 : 1);
+    tft.fillScreen(BACKGROUND);
 
     resetText();
     drawTextBox();

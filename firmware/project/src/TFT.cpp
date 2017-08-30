@@ -1,13 +1,17 @@
 #include "TFT.h"
 
+const bool USB_CABLE_RIGHT = true;
 #define MCUFRIEND
 
 #if defined(MCUFRIEND)
 #include <MCUFRIEND_kbv.h>
 uint16_t scrollbuf[240];  // my biggest screen is 320x480
+MCUFRIEND_kbv* mcu_tft = NULL;
 MCUFRIEND_kbv& buildTFT() {
-    MCUFRIEND_kbv* tft = new MCUFRIEND_kbv();
-    return *tft;
+    if (mcu_tft == NULL) {
+        mcu_tft = new MCUFRIEND_kbv();
+    }
+    return *mcu_tft;
 }
 #else
 #define LCD_CS A3             // Chip Select goes to Analog 3
@@ -18,4 +22,3 @@ MCUFRIEND_kbv& buildTFT() {
 #include <Adafruit_TFTLCD.h>  // Hardware-specific library
 Adafruit_TFTLCD tft(LCD_CS, LCD_CD, LCD_WR, LCD_RD, LCD_RESET);
 #endif
-

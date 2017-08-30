@@ -7,6 +7,7 @@ class Keyboard {
    public:
     void draw();
     char * processKeys();
+    ~Keyboard();
 };
 
 #endif
