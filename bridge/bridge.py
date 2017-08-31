@@ -40,7 +40,6 @@ def enable_cors(fn):
 def request_to_serial():
     try:
         payload = request.json()['payload']
-        return {'response': payload}
         response = send_payload_to_serial(payload)
         return {'response': response}
     except PayloadTooBigException:
