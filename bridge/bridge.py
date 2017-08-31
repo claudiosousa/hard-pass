@@ -8,7 +8,7 @@ import argparse
 import json
 
 PAYLOAD_TERMINATOR = b'\n'
-KNOWN_DEVICES = {"USB-SERIAL CH340"}
+KNOWN_DEVICES = {"USB VID:PID=1A86:7523"}
 
 
 class PayloadTooBigException(BaseException):
@@ -20,7 +20,7 @@ app = Bottle()
 def find_device_port():
     for port in serial.tools.list_ports.comports():
         for known_device in KNOWN_DEVICES:
-            if known_device in port.description:
+            if known_device in port.hwid:
                 return str(port.device)
 
 def enable_cors(fn):
