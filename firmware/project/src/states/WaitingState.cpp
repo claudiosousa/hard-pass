@@ -1,6 +1,6 @@
 #include "WaitingState.h"
-#include "colors.h"
 #include "TFT.h"
+#include "colors.h"
 
 WaitingState::WaitingState() {
     tft.fillScreen(WHITE);
@@ -18,6 +18,7 @@ WaitingState::WaitingState() {
 }
 
 int WaitingState::loop() {
+    return 0;
 }
 
 WaitingState::~WaitingState() {
