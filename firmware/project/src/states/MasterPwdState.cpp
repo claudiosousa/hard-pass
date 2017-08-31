@@ -11,7 +11,7 @@ MasterPwdState::MasterPwdState() {
 int MasterPwdState::loop() {
     char* enteredText = kb->processKeys();
     if (enteredText) {
-        //Serial.print("Submited text :" + String(enteredText) + "\n");
+        Serial.print("Submited text :" + String(enteredText) + "\n");
         return 2;
     }
     return 0;

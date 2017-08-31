@@ -1,6 +1,5 @@
 #include "TFT.h"
 
-const bool USB_CABLE_RIGHT = true;
 #define MCUFRIEND
 
 #if defined(MCUFRIEND)
