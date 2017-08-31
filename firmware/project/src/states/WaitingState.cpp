@@ -1,6 +1,6 @@
 #include "WaitingState.h"
-#include "colors.h"
 #include "TFT.h"
+#include "colors.h"
 
 unsigned long time;
 const int16_t x = 220;

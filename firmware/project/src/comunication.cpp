@@ -7,9 +7,17 @@ void communication_setup() {
 
 const char TERMINATOR = '\0';
 
+String s;
+
 void communication_loop() {
     if (!Serial.available())
         return;
-    String s = Serial.readStringUntil(TERMINATOR);
+    s = Serial.readStringUntil(TERMINATOR);
     Serial.print(s + TERMINATOR);
+}
+
+char* communication_message() {
+    if (!s.length())
+        return NULL;
+    return s.c_str();
 }
