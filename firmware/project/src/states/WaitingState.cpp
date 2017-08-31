@@ -2,23 +2,41 @@
 #include "colors.h"
 #include "TFT.h"
 
-WaitingState::WaitingState() {
+unsigned long time;
+const int16_t x = 260;
+int counter = 1;
+
+WaitingState::WaitingState()
+{
+
     tft.fillScreen(WHITE);
-    tft.drawChar(40, 100, 'W', RED, WHITE, 5);
-    tft.drawChar(70, 100, 'a', RED, WHITE, 5);
-    tft.drawChar(100, 100, 'i', RED, WHITE, 5);
-    tft.drawChar(130, 100, 't', RED, WHITE, 5);
-    tft.drawChar(160, 100, 'i', RED, WHITE, 5);
-    tft.drawChar(190, 100, 'n', RED, WHITE, 5);
-    tft.drawChar(220, 100, 'g', RED, WHITE, 5);
-    tft.drawChar(250, 120, '.', RED, WHITE, 2);
-    tft.drawChar(260, 120, '.', RED, WHITE, 2);
-    tft.drawChar(270, 120, '.', RED, WHITE, 2);
-    
+    tft.setCursor(40, 100);
+    tft.setTextColor(BLACK);
+    tft.setTextSize(5);
+    tft.setTextWrap(false);
+    tft.print("Waiting");
+    time = millis();
 }
 
-int WaitingState::loop() {
+int WaitingState::loop()
+{
+
+    unsigned long time2 = millis();
+
+    if (time2 < time + 1000)
+        return 0;
+
+    if (counter == 3)
+    {
+        counter = 1;
+        tft.fillRect(x, 110, 20, 10, YELLOW);
+    }
+    tft.drawChar(x + counter * 10, 120, '.', BLACK, WHITE, 2);
+    counter++;
+
+    time = millis();
 }
 
-WaitingState::~WaitingState() {
+WaitingState::~WaitingState()
+{
 }
