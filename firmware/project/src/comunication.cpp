@@ -5,7 +5,7 @@ void communication_setup() {
     Serial.begin(115200);
 }
 
-const char TERMINATOR = 'x';
+const char TERMINATOR = '\n';
 
 String s;
 

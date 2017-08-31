@@ -11,6 +11,7 @@ class WaitingState : public BaseState {
     ~WaitingState();
 
    private:
+    void drawScreenLoop();
     MCUFRIEND_kbv& tft = buildTFT();
 };
 

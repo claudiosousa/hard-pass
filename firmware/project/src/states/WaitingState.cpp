@@ -17,7 +17,7 @@ WaitingState::WaitingState() {
     time = millis();
 }
 
-void drawScreenLoop() {
+void WaitingState::drawScreenLoop() {
     unsigned long time2 = millis();
 
     if (time2 < time + 1000)
