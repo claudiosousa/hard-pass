@@ -6,7 +6,7 @@ from serial import Serial
 import serial.tools.list_ports
 import argparse
 
-PAYLOAD_TERMINATOR = b'\0'
+PAYLOAD_TERMINATOR = b'\n'
 KNOWN_DEVICES = {"USB-SERIAL CH340"}
 
 
