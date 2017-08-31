@@ -5,11 +5,26 @@ void communication_setup() {
     Serial.begin(115200);
 }
 
-const char TERMINATOR = '\0';
+const char TERMINATOR = '\n';
+
+String s;
 
 void communication_loop() {
     if (!Serial.available())
         return;
-    String s = Serial.readStringUntil(TERMINATOR);
-    Serial.print(s + TERMINATOR);
+    s = Serial.readStringUntil(TERMINATOR);
+}
+
+char* communication_read() {
+    if (!s.length())
+        return NULL;
+    return s.c_str();
+}
+void communication_clear_read() {
+    s = String();
+}
+
+void communication_write(char* msg) {
+    Serial.print(msg);
+    Serial.print(TERMINATOR);
 }

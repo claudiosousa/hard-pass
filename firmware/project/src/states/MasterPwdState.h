@@ -5,6 +5,8 @@
 #include "AndroidKeyboard.h"
 #include "BaseState.h"
 
+extern char* masterPwd;
+
 class MasterPwdState : public BaseState {
    public:
     MasterPwdState();

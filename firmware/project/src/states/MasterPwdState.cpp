@@ -3,22 +3,18 @@
 #include <Arduino.h>
 #include "TouchManager.h"
 
+char* masterPwd;
+
 MasterPwdState::MasterPwdState() {
-    Serial.println("Started...");
-
-    Serial.println("Started1...");
     kb = new Keyboard();
-
-    Serial.println("Started2...");
     kb->draw();
-
-    Serial.println("Started3...");
 }
 
 int MasterPwdState::loop() {
-    char* enteredText = kb->processKeys();
-    if (enteredText)
-        Serial.print("Submited text :" + String(enteredText) + "\n");
+    masterPwd = kb->processKeys();
+    if (masterPwd)
+        return 2;  // move to waiting state
+
     return 0;
 }
 

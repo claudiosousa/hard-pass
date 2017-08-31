@@ -30,8 +30,6 @@ const char MAX_TEXT_LENGTH = 23;
 char enteredText[MAX_TEXT_LENGTH];
 char currentTextLegth = 0;
 
-const bool USB_CABLE_RIGHT = true;
-
 bool shiftPressed = false;
 bool symbolsPressed = false;
 
@@ -135,9 +133,8 @@ void drawKeyboard() {
 }
 
 void Keyboard::draw() {
-    tft.begin(0x9341);
+   
     tft.fillScreen(BACKGROUND);
-    tft.setRotation(USB_CABLE_RIGHT ? 3 : 1);
 
     resetText();
     drawTextBox();

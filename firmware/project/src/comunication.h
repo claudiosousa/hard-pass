@@ -3,5 +3,8 @@
 
 void communication_setup();
 void communication_loop();
+char* communication_read();
+void communication_clear_read();
+void communication_write(char* msg);
 
 #endif
