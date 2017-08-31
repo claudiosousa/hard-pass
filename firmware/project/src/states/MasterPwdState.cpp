@@ -12,10 +12,9 @@ MasterPwdState::MasterPwdState() {
 
 int MasterPwdState::loop() {
     masterPwd = kb->processKeys();
-    if (masterPwd) {
-        Serial.print("Submited text: " + String(masterPwd) + "\n");
-        return 2;
-    }
+    if (masterPwd)
+        return 2;  // move to waiting state
+
     return 0;
 }
 

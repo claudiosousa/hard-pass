@@ -1,9 +1,10 @@
 #include "stateMachine.h"
+#include "states/AskPwdState.h"
 #include "states/BaseState.h"
 #include "states/MasterPwdState.h"
 #include "states/WaitingState.h"
 
-typedef enum StateName { MasterPwd = 1, Waiting = 2 } StateName;
+typedef enum StateName { MasterPwd = 1, Waiting = 2, AskPwd = 3 } StateName;
 
 BaseState* currentState;
 
@@ -14,6 +15,9 @@ void setState(StateName newStateName) {
             break;
         case Waiting:
             currentState = new WaitingState();
+            break;
+        case AskPwd:
+            currentState = new AskPwdState();
             break;
         default:
             break;
