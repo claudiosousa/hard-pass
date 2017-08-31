@@ -37,7 +37,6 @@ def enable_cors(fn):
     return _enable_cors
 
 
-# @app.post('/')
 @app.route('/', method=['POST', 'OPTIONS'])
 @enable_cors
 def request_to_serial():
