@@ -1,4 +1,4 @@
-console.log('loaded extension')
+browser.tabs.executeScript(null, { file: '/content_scripts/psl.min.js' });
 
 const generatePasswordButton = document.querySelector("#generate-password-button");
 

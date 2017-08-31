@@ -11,7 +11,7 @@ new Promise((resolve, reject) => {
             "Content-type": "application/json"
         },
         body: JSON.stringify({
-            'payload': window.location.hostname
+            'payload': psl.parse(window.location.hostname).domain
         })
     })]))
     .then(([input, response]) => {
