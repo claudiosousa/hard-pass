@@ -5,6 +5,7 @@ from bottle import Bottle, run, request, response
 from serial import Serial
 import serial.tools.list_ports
 import argparse
+import json
 
 PAYLOAD_TERMINATOR = b'\n'
 KNOWN_DEVICES = {"USB-SERIAL CH340"}
@@ -35,13 +36,16 @@ def enable_cors(fn):
 
     return _enable_cors
 
-@app.post('/')
+
+# @app.post('/')
+@app.route('/', method=['POST', 'OPTIONS'])
 @enable_cors
 def request_to_serial():
     try:
-        payload = request.json()['payload']
+        body = str(request.body.read(), encoding='ascii')
+        payload = json.loads(body)['payload']
         response = send_payload_to_serial(payload)
-        return {'response': response}
+        return {'payload': response}
     except PayloadTooBigException:
         return {'error': 'payload too big'}
 
