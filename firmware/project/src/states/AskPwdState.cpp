@@ -6,10 +6,7 @@
 #include "comunication.h"
 
 #define BACKGROUND ANDROID_KB_BG
-#define BUTTON_SHADOW ANDROID_KB_SHADOW
-#define BUTTON_BORDER ANDROID_KB_SHADOW
-#define BUTTON_BACKGROUND ANDROID_KB_KEY
-#define BUTTON_SPECIAL_BACKGROUND ANDROID_KB_SPECIAL_KEY
+#define MESSAGE_BACKGROUND ANDROID_KB_KEY
 
 const int BUTTONS_SIZE[2] = {100, 50};
 const int BUTTONS_POS[2][2] = {{50, 150}, {170, 150}};  // j'ai déplacé tes boutons de 10 pixels à droite, ils n'étaient pas centrés
@@ -21,14 +18,14 @@ AskPwdState::AskPwdState()
     msg = communication_read();
     tft.fillScreen(BACKGROUND);
    
-    tft.fillRoundRect(30, 40, 260, 40, 4, BUTTON_BACKGROUND);
+    tft.fillRoundRect(30, 40, 260, 40, 4, MESSAGE_BACKGROUND);
     tft.setCursor(43, 52);
     tft.setTextColor(WHITE);
     tft.setTextSize(2);
     tft.setTextWrap(false);
     tft.print("Request received for");
 
-    tft.fillRoundRect(30, 90, 260, 40, 4, BUTTON_BACKGROUND);
+    tft.fillRoundRect(30, 90, 260, 40, 4, MESSAGE_BACKGROUND);
     tft.setCursor(100, 102);
     tft.setTextColor(WHITE);
     tft.setTextSize(2);
