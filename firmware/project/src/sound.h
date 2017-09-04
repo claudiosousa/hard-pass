@@ -120,5 +120,6 @@ void sound_setup();
 void sound_loop();
 void sound_play(Melody* melody);
 bool sound_isPlaying();
+bool sound_playTouch() ;
 
 #endif

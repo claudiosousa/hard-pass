@@ -19,14 +19,6 @@ int startSoundDurations[] = {130, 130, 130, 130, 130, 130};
 Melody startSound = {
     .length = sizeof(startSoundNotes) / sizeof(float), .notes = startSoundNotes, .durations = startSoundDurations};
 
-float winSoundNotes[] = {note_G2, note_C3,  note_E3,  note_G3, note_C4,  note_E4,  note_G4,  note_E4,  note_Ab2,
-                         note_C3, note_Eb3, note_Ab3, note_C4, note_Eb4, note_Ab4, note_Eb4, note_Bb2, note_D3,
-                         note_F3, note_Bb3, note_D4,  note_F4, note_Bb4, note_B4,  note_B4,  note_B4,  note_C5};
-int winSoundDurations[] = {130, 130, 130, 130, 130, 130, 433, 433, 130, 130, 130, 130, 130, 130,
-                           433, 433, 130, 130, 130, 130, 130, 130, 433, 130, 130, 130, 650};
-Melody winSound = {
-    .length = sizeof(winSoundNotes) / sizeof(float), .notes = winSoundNotes, .durations = winSoundDurations};
-
 void sound_setup() {
 }  // Nothing to setup, just start playing!
 
@@ -45,33 +37,14 @@ void sound_play(Melody* melody) {
     nextNotePos = 0;
 }
 
-int i = 0;
+float touchNotes[] = {note_C4};
+int touchDurations[] = {130};
+Melody touchSound = {.length = sizeof(touchNotes) / sizeof(float), .notes = touchNotes, .durations = touchDurations};
 
-void playNextDemoSound() {
-    if (!sound_isPlaying()) {
-        switch (i) {
-            case 1:
-                sound_play(&startSound);
-                break;
-            case 3:
-                sound_play(&gameOverSound);
-                break;
-            case 2:
-                sound_play(&winSound);
-                break;
-            case 0:
-                sound_play(&submitMoveSound);
-                break;
-        }
-        i++;
-        if (i == 4)
-            i = 0;
-    }
+bool sound_playTouch() {
+    sound_play(&touchSound);
 }
-
 void sound_loop() {
-    //playNextDemoSound();
-
     if (!currentMelody)
         return;
 
