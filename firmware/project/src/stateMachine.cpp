@@ -22,6 +22,7 @@ void setState(StateName newStateName) {
         default:
             break;
     }
+    delete currentState;
 }
 
 void statemachine_setup() {
