@@ -5,21 +5,48 @@
 #include "colors.h"
 #include "comunication.h"
 
+#define BACKGROUND ANDROID_KB_BG
+#define MESSAGE_BACKGROUND ANDROID_KB_KEY
+
 const int BUTTONS_SIZE[2] = {100, 50};
-const int BUTTONS_POS[2][2] = {{40, 150}, {160, 150}};
+const int BUTTONS_POS[2][2] = {{50, 150}, {170, 150}};  // j'ai déplacé tes boutons de 10 pixels à droite, ils n'étaient pas centrés
 const unsigned int BUTTONS_COLOR[2] = {RED, GREEN};
 
 char *msg;
 AskPwdState::AskPwdState()
 {
     msg = communication_read();
-    tft.fillScreen(WHITE);
+    tft.fillScreen(BACKGROUND);
+   
+    tft.fillRoundRect(30, 40, 260, 40, 4, MESSAGE_BACKGROUND);
+    tft.setCursor(43, 52);
+    tft.setTextColor(WHITE);
+    tft.setTextSize(2);
+    tft.setTextWrap(false);
+    tft.print("Request received for");
 
-    for (int i = 0; i < 2; i++)
-    {
+    tft.fillRoundRect(30, 90, 260, 40, 4, MESSAGE_BACKGROUND);
+    tft.setCursor(100, 102);
+    tft.setTextColor(WHITE);
+    tft.setTextSize(2);
+    tft.setTextWrap(false);
+    tft.print(msg);
+
+    for (int i = 0; i < 2; i++){
         int *pos = BUTTONS_POS[i];
-        tft.fillRoundRect(pos[0], pos[1], BUTTONS_SIZE[0], BUTTONS_SIZE[1], 3, BUTTONS_COLOR[i]);
+        tft.fillRoundRect(pos[0], pos[1], BUTTONS_SIZE[0], BUTTONS_SIZE[1], 3, BUTTONS_COLOR[i]);       
     }
+    tft.setCursor(65, 168);
+    tft.setTextColor(WHITE);
+    tft.setTextSize(2);
+    tft.setTextWrap(false);
+    tft.print("Cancel");
+
+    tft.setCursor(210, 168);
+    tft.setTextColor(WHITE);
+    tft.setTextSize(2);
+    tft.setTextWrap(false);
+    tft.print("Ok"); 
 }
 
 int AskPwdState::loop()
