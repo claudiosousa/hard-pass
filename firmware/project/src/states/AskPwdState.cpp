@@ -18,16 +18,13 @@ char *pwdModifier;
 const char *errMsg = "";
 
 AskPwdState::AskPwdState() {
-    pwdModifier = communication_read();
+    msg = communication_read();
     int i = 0;
-    while (pwdModifier[i] != '\n')
+    while (msg[i] != '\n')
         i++;
-    pwdModifier[i] = 0;
-    msg = pwdModifier + (i + 1);
+    msg[i] = 0;
 
-    communication_write(String(i).c_str());
-    communication_write(pwdModifier);
-    communication_write(msg);
+    pwdModifier = msg + (i + 1);
 
     tft.fillScreen(BACKGROUND);
 
