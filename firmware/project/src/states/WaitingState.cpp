@@ -7,7 +7,7 @@
 #define MESSAGE_BACKGROUND ANDROID_KB_KEY
 
 unsigned long time;
-const int16_t x = 210;
+const int16_t position_x = 195;
 int counter = 0;
 
 WaitingState::WaitingState() {
@@ -29,10 +29,10 @@ void WaitingState::drawScreenLoop() {
 
     if (counter == 3) {
         counter = 0;
-        tft.fillRect(x, 110, 30, 29, MESSAGE_BACKGROUND);
+        tft.fillRect(position_x, 110, 30, 29, MESSAGE_BACKGROUND);
     }
 
-    tft.drawChar(x + counter * 5, 120, '.', WHITE, MESSAGE_BACKGROUND, 1);
+    tft.drawChar(position_x + counter * 7, 122, '.', WHITE, MESSAGE_BACKGROUND, 1);
     counter++;
 
     time = millis();
