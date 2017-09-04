@@ -14,8 +14,9 @@ KNOWN_DEVICES = {"USB VID:PID=1A86:7523"}
 class PayloadTooBigException(BaseException):
     pass
 
-serial_port = None
-baud_rate = None
+serialport = None
+baudrate = None
+ser = serial.Serial()
 app = Bottle()
 
 def find_device_port():
@@ -56,21 +57,28 @@ def send_payload_to_serial(payload:str) -> str:
     if len(payload_bytes) > 128:
         raise PayloadTooBigException()
 
-    with Serial(port=serial_port, baudrate=baud_rate) as ser:
+    try:
         ser.write(payload_bytes)
         response_bytes = ser.read_until(PAYLOAD_TERMINATOR)[:-1]
-
-    response = str(response_bytes, encoding='ascii')
-    return response
-
+        response = str(response_bytes, encoding='ascii')
+        return response
+    except serial.SerialException:
+        if not ser.closed:
+            ser.close()
+        ser.open()
+        raise
 
 def parse_args():
+    global serialport
+    global baudrate
+
     arg_parser = argparse.ArgumentParser(description='Forwards 0 terminated messages between HTTP and serial port')
     arg_parser.add_argument('--serialport', '-s', help='Serial port', metavar='PORT', default=find_device_port(), type=str)
     arg_parser.add_argument('--baudrate', '-b', help='Serial baud rate', metavar='RATE', default=115200, type=int)
     args = arg_parser.parse_args()
-    serial_port = args.serialport
-    baud_rate = args.baudrate
+    ser.port = args.serialport
+    ser.baudrate = args.baudrate
+    ser.open()
     return args
 
 
