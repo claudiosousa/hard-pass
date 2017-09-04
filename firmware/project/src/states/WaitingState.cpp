@@ -7,7 +7,6 @@
 #define MESSAGE_BACKGROUND ANDROID_KB_KEY
 
 unsigned long time;
-const int16_t position_x = 195;
 int counter = 0;
 
 void WaitingState::drawWaitingScreen(){
@@ -27,6 +26,7 @@ WaitingState::WaitingState() {
 
 void WaitingState::drawScreenLoop() {
     unsigned long time2 = millis();
+    const int16_t position_x = 195;
 
     if (time2 < time + 1000)
         return;
