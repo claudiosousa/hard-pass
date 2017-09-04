@@ -22,7 +22,7 @@ AskPwdState::AskPwdState()
     tft.fillScreen(BACKGROUND);
 
     tft.fillRoundRect(30, 40, 260, 40, 4, MESSAGE_BACKGROUND);
-    tft.setCursor(43, 52);
+    tft.setCursor(76, 52);
     tft.setTextColor(WHITE);
     tft.setTextSize(2);
     tft.setTextWrap(false);
