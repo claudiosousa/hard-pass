@@ -41,7 +41,7 @@ float touchNotes[] = {note_C4};
 int touchDurations[] = {130};
 Melody touchSound = {.length = sizeof(touchNotes) / sizeof(float), .notes = touchNotes, .durations = touchDurations};
 
-bool sound_playTouch() {
+void sound_playTouch() {
     sound_play(&touchSound);
 }
 void sound_loop() {
