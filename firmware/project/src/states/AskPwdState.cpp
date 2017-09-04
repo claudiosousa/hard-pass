@@ -17,7 +17,40 @@ char *msg;
 char *pwdModifier;
 const char *errMsg = "";
 
-AskPwdState::AskPwdState() {
+void AskPwdState::drawAskPwdStateScreen(){
+        tft.fillScreen(BACKGROUND);    
+        tft.fillRoundRect(30, 40, 260, 40, 4, MESSAGE_BACKGROUND);
+        tft.setCursor(76, 52);
+        tft.setTextColor(WHITE);
+        tft.setTextSize(2);
+        tft.setTextWrap(false);
+        tft.print("Password asked:");    
+        int len = strlen(msg);
+        int center_position = ((260 - len * 12) / 2) + 30;    
+        tft.fillRoundRect(30, 90, 260, 40, 4, MESSAGE_BACKGROUND);
+        tft.setCursor(center_position, 102);
+        tft.setTextColor(ORANGE);
+        tft.setTextSize(2);
+        tft.setTextWrap(false);
+        tft.print(msg);
+    
+        for (int i = 0; i < 2; i++) {
+            int *pos = BUTTONS_POS[i];
+            tft.fillRoundRect(pos[0], pos[1], BUTTONS_SIZE[0], BUTTONS_SIZE[1], 3, BUTTONS_COLOR[i]);
+        }
+        tft.setCursor(65, 168);
+        tft.setTextColor(WHITE);
+        tft.setTextSize(2);
+        tft.setTextWrap(false);
+        tft.print("Cancel");    
+        tft.setCursor(210, 168);
+        tft.setTextColor(WHITE);
+        tft.setTextSize(2);
+        tft.setTextWrap(false);
+        tft.print("Ok");
+}
+
+void AskPwdState::parseMessage(){
     msg = communication_read();
     int i = 0;
     while (msg[i] != '\n')
@@ -25,41 +58,10 @@ AskPwdState::AskPwdState() {
     msg[i] = 0;
 
     pwdModifier = msg + (i + 1);
-
-    tft.fillScreen(BACKGROUND);
-
-    tft.fillRoundRect(30, 40, 260, 40, 4, MESSAGE_BACKGROUND);
-    tft.setCursor(76, 52);
-    tft.setTextColor(WHITE);
-    tft.setTextSize(2);
-    tft.setTextWrap(false);
-    tft.print("Password asked:");
-
-    int len = strlen(msg);
-    int center_position = ((260 - len * 12) / 2) + 30;
-
-    tft.fillRoundRect(30, 90, 260, 40, 4, MESSAGE_BACKGROUND);
-    tft.setCursor(center_position, 102);
-    tft.setTextColor(ORANGE);
-    tft.setTextSize(2);
-    tft.setTextWrap(false);
-    tft.print(msg);
-
-    for (int i = 0; i < 2; i++) {
-        int *pos = BUTTONS_POS[i];
-        tft.fillRoundRect(pos[0], pos[1], BUTTONS_SIZE[0], BUTTONS_SIZE[1], 3, BUTTONS_COLOR[i]);
-    }
-    tft.setCursor(65, 168);
-    tft.setTextColor(WHITE);
-    tft.setTextSize(2);
-    tft.setTextWrap(false);
-    tft.print("Cancel");
-
-    tft.setCursor(210, 168);
-    tft.setTextColor(WHITE);
-    tft.setTextSize(2);
-    tft.setTextWrap(false);
-    tft.print("Ok");
+}
+AskPwdState::AskPwdState() {
+    parseMessage();
+    drawAskPwdStateScreen();
 }
 
 int AskPwdState::loop() {

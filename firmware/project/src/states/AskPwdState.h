@@ -12,6 +12,8 @@ class AskPwdState : public BaseState {
 
    private:
     MCUFRIEND_kbv& tft = buildTFT();
+    void drawAskPwdStateScreen();
+    void parseMessage();
 };
 
 #endif

@@ -10,7 +10,7 @@ unsigned long time;
 const int16_t position_x = 195;
 int counter = 0;
 
-WaitingState::WaitingState() {
+void WaitingState::drawWaitingScreen(){
     tft.fillScreen(BACKGROUND);
     tft.fillRoundRect(40, 100, 250, 40, 4, MESSAGE_BACKGROUND);
     tft.setCursor(110, 115);
@@ -19,6 +19,10 @@ WaitingState::WaitingState() {
     tft.setTextWrap(false);
     tft.print("Waiting");
     time = millis();
+}
+
+WaitingState::WaitingState() {
+    drawWaitingScreen();    
 }
 
 void WaitingState::drawScreenLoop() {
