@@ -4,5 +4,7 @@
 class BaseState {
    public:
     virtual int loop() = 0;
+    virtual ~BaseState() {
+    }
 };
 #endif

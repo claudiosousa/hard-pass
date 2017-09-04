@@ -22,6 +22,8 @@ void setState(StateName newStateName) {
         default:
             break;
     }
+    // deleet causes reboot loop
+    // delete currentState;
 }
 
 void statemachine_setup() {

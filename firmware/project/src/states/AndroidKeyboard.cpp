@@ -4,6 +4,7 @@
 #include "TFT.h"
 #include "TouchManager.h"
 #include "colors.h"
+#include "sound.h"
 
 #define BACKGROUND ANDROID_KB_BG
 #define BUTTON_SHADOW ANDROID_KB_SHADOW
@@ -132,8 +133,12 @@ void drawKeyboard() {
         drawKeyPos(0, -y - 1);
 }
 
+Keyboard::~Keyboard(){
+
+}
+
 void Keyboard::draw() {
-   
+
     tft.fillScreen(BACKGROUND);
 
     resetText();
@@ -212,6 +217,8 @@ char* Keyboard::processKeys() {
     char key = getPressedTouch();
     if (!key)
         return NULL;
+
+    sound_playTouch();
 
     if (key < 5) {
         // TODO: handle special keys
