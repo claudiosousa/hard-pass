@@ -86,3 +86,6 @@ int AskPwdState::loop() {
 
     return 0;
 }
+
+AskPwdState::~AskPwdState() {
+}

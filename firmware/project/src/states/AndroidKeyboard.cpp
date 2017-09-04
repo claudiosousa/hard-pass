@@ -132,8 +132,12 @@ void drawKeyboard() {
         drawKeyPos(0, -y - 1);
 }
 
+Keyboard::~Keyboard(){
+
+}
+
 void Keyboard::draw() {
-   
+
     tft.fillScreen(BACKGROUND);
 
     resetText();
