@@ -7,7 +7,7 @@ import serial.tools.list_ports
 import argparse
 import json
 
-PAYLOAD_TERMINATOR = b'\n'
+PAYLOAD_TERMINATOR = b'\4'
 KNOWN_DEVICES = {"USB VID:PID=1A86:7523"}
 
 
