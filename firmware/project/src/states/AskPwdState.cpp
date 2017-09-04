@@ -14,7 +14,6 @@ const int BUTTONS_POS[2][2] = {{50, 150}, {170, 150}}; // j'ai déplacé tes bou
 const unsigned int BUTTONS_COLOR[2] = {RED, DARKGREEN};
 
 char *msg;
-int len, center_position;
 
 AskPwdState::AskPwdState()
 {
@@ -28,8 +27,8 @@ AskPwdState::AskPwdState()
     tft.setTextWrap(false);
     tft.print("Password asked:");
 
-    len = strlen(msg);
-    center_position = ((260 -len * 12) / 2) + 30;
+    int len = strlen(msg);
+    int center_position = ((260 -len * 12) / 2) + 30;
 
     tft.fillRoundRect(30, 90, 260, 40, 4, MESSAGE_BACKGROUND);
     tft.setCursor(center_position, 102);
