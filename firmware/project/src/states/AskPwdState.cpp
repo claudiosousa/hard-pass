@@ -11,7 +11,7 @@
 
 const int BUTTONS_SIZE[2] = {100, 50};
 const int BUTTONS_POS[2][2] = {{50, 150}, {170, 150}}; // j'ai déplacé tes boutons de 10 pixels à droite, ils n'étaient pas centrés
-const unsigned int BUTTONS_COLOR[2] = {RED, DARKGREEN};
+const unsigned int BUTTONS_COLOR[2] = {DARKRED, DARKGREEN};
 
 char *msg;
 
