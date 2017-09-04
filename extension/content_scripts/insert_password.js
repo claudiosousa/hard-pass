@@ -11,17 +11,10 @@ new Promise((resolve, reject) => {
             "Content-type": "application/json"
         },
         body: JSON.stringify({
-            'payload': psl.parse(window.location.hostname).domain
+            'payload': psl.parse(window.location.hostname).domain + '\nsome variant'
         })
     })]))
-    .then(([input, response]) => {
-        // var contentType = response.headers.get("content-type")
-        // if (contentType && contentType.includes("application/json")) {
-        //     return [input, response.json()]
-        // }
-        // throw new TypeError("Response is not JSON")
-        return Promise.all([input, response.json()])
-    })
+    .then(([input, response]) => Promise.all([input, response.json()]))
     .then(([input, json]) => {
         if ('payload' in json) {
             input.value = json.payload
