@@ -2,7 +2,7 @@
 #include <MCUFRIEND_kbv.h>
 #include <avr/pgmspace.h>
 #include "TFT.h"
-#include "TouchManager.h"
+#include "touch.h"
 #include "colors.h"
 #include "sound.h"
 
@@ -183,7 +183,7 @@ int lastTouchPos[2];
 unsigned long lastTouchTime = 0;
 char getPressedTouch() {
     char res = 0;
-    if (TouchManager_getPoint(point))
+    if (touch_getPoint(point))
         res = getPointTouch(point, pos);
 
     unsigned long ms = millis();

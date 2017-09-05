@@ -4,5 +4,7 @@
 #include <TouchScreen.h>
 
 MCUFRIEND_kbv& buildTFT();
+void TFT_setup();
+void TFT_updateScreenOrientation();
 
 #endif
