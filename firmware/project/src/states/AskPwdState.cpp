@@ -64,7 +64,7 @@ void AskPwdState::parseMessage() {
 AskPwdState::AskPwdState() {
     sound_passwordRequest();
     parseMessage();
-    drawAskPwdStateScreen();    
+    drawAskPwdStateScreen();
 }
 
 int AskPwdState::loop() {
@@ -85,7 +85,7 @@ int AskPwdState::loop() {
             Sha1.print(msg);
             hash = Sha1.result();
 
-            communication_writebytes(hash, 60);
+            communication_writebytes(hash, 20);
         } else
             communication_write(errMsg);
 
