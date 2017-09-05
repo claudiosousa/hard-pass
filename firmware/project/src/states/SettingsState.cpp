@@ -13,7 +13,7 @@ void SettingsState::drawInitialScreen() {
     tft.setTextColor(WHITE);
     tft.setTextSize(2);
     tft.setTextWrap(false);
-    tft.print("Waiting");
+    tft.print("Settings");
 }
 
 SettingsState::SettingsState() {
