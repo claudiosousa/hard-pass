@@ -41,9 +41,20 @@ float touchNotes[] = {note_C4};
 int touchDurations[] = {130};
 Melody touchSound = {.length = sizeof(touchNotes) / sizeof(float), .notes = touchNotes, .durations = touchDurations};
 
-bool sound_playTouch() {
+float passwordRequestNotes[] = {note_B3, note_F4, note_F4, note_F4, note_E4, note_D4, note_C4, note_E3, note_E3, note_C3};
+int passwordRequestDurations[] = {162, 162, 162, 162, 217, 217, 217, 162, 162, 162, 162, 162, 5};
+Melody passwordRequestSound = {.length = sizeof(passwordRequestNotes) / sizeof(float),
+                        .notes = passwordRequestNotes,
+                        .durations = passwordRequestDurations};
+
+void sound_playTouch() {
     sound_play(&touchSound);
 }
+
+void sound_passwordRequest() {
+    sound_play(&passwordRequestSound);
+}
+
 void sound_loop() {
     if (!currentMelody)
         return;

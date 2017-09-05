@@ -5,6 +5,7 @@
 #include "TouchManager.h"
 #include "colors.h"
 #include "comunication.h"
+#include "sound.h"
 
 #define BACKGROUND ANDROID_KB_BG
 #define MESSAGE_BACKGROUND ANDROID_KB_KEY
@@ -60,8 +61,9 @@ void AskPwdState::parseMessage(){
     pwdModifier = msg + (i + 1);
 }
 AskPwdState::AskPwdState() {
+    sound_passwordRequest();
     parseMessage();
-    drawAskPwdStateScreen();
+    drawAskPwdStateScreen();    
 }
 
 int AskPwdState::loop() {
