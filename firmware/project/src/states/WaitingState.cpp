@@ -6,9 +6,6 @@
 #define BACKGROUND ANDROID_KB_BG
 #define MESSAGE_BACKGROUND ANDROID_KB_KEY
 
-unsigned long time;
-int counter = 0;
-
 void WaitingState::drawWaitingScreen(){
     tft.fillScreen(BACKGROUND);
     tft.fillRoundRect(40, 100, 250, 40, 4, MESSAGE_BACKGROUND);
@@ -21,7 +18,7 @@ void WaitingState::drawWaitingScreen(){
 }
 
 WaitingState::WaitingState() {
-    drawWaitingScreen();    
+    drawWaitingScreen();
 }
 
 void WaitingState::drawScreenLoop() {
