@@ -111,15 +111,11 @@ typedef struct {
     int* durations;
 } Melody;
 
-extern Melody gameOverSound;
-extern Melody winSound;
-extern Melody submitMoveSound;
-extern Melody startSound;
-
 void sound_setup();
 void sound_loop();
 void sound_play(Melody* melody);
 bool sound_isPlaying();
 void sound_playTouch() ;
+void sound_passwordRequest();
 
 #endif
