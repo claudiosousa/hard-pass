@@ -1,6 +1,7 @@
 #include "sound.h"
 #include <Arduino.h>
 #include <NewTone.h>
+#include "states/settings.h"
 
 float gameOverSoundNotes[] = {note_B3, note_F4, note_F4, note_F4, note_E4, note_D4, note_C4, note_E3, note_E3, note_C3};
 int gameOverSoundDurations[] = {162, 162, 162, 162, 217, 217, 217, 162, 162, 162, 162, 162, 5};
@@ -32,6 +33,8 @@ bool sound_isPlaying() {
 }
 
 void sound_play(Melody* melody) {
+    if (!settings_getSoundIsOn())
+        return;
     currentMelody = melody;
     nextNoteTime = millis();
     nextNotePos = 0;
@@ -41,11 +44,12 @@ float touchNotes[] = {note_C4};
 int touchDurations[] = {130};
 Melody touchSound = {.length = sizeof(touchNotes) / sizeof(float), .notes = touchNotes, .durations = touchDurations};
 
-float passwordRequestNotes[] = {note_B3, note_F4, note_F4, note_F4, note_E4, note_D4, note_C4, note_E3, note_E3, note_C3};
+float passwordRequestNotes[] = {note_B3, note_F4, note_F4, note_F4, note_E4,
+                                note_D4, note_C4, note_E3, note_E3, note_C3};
 int passwordRequestDurations[] = {162, 162, 162, 162, 217, 217, 217, 162, 162, 162, 162, 162, 5};
 Melody passwordRequestSound = {.length = sizeof(passwordRequestNotes) / sizeof(float),
-                        .notes = passwordRequestNotes,
-                        .durations = passwordRequestDurations};
+                               .notes = passwordRequestNotes,
+                               .durations = passwordRequestDurations};
 
 void sound_playTouch() {
     sound_play(&touchSound);

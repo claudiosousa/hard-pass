@@ -1,4 +1,5 @@
 #include "TFT.h"
+#include "states/settings.h"
 
 #define MCUFRIEND
 
@@ -12,6 +13,19 @@ MCUFRIEND_kbv& buildTFT() {
     }
     return *mcu_tft;
 }
+
+void TFT_setup() {
+    MCUFRIEND_kbv& tft = buildTFT();
+    tft.begin(0x9341);
+    settings_setScreenIsRightOrientation(true);
+    TFT_updateScreenOrientation();
+}
+
+void TFT_updateScreenOrientation() {
+    MCUFRIEND_kbv& tft = buildTFT();
+    tft.setRotation(settings_getScreenIsRightOrientation() ? 3 : 1);
+}
+
 #else
 #define LCD_CS A3             // Chip Select goes to Analog 3
 #define LCD_CD A2             // Command/Data goes to Analog 2

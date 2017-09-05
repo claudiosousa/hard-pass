@@ -2,7 +2,11 @@
 #define _SETTINGS_H
 
 void settings_setup();
-bool settings_soundIsOn();
-bool settings_setSoundOn(bool sound);
+bool settings_getSoundIsOn();
+void settings_setSoundOn(bool soundOn);
+bool settings_getScreenIsRightOrientation();
+void settings_setScreenIsRightOrientation(bool rightOrientation);
+bool settings_getRemeberPwd();
+void settings_setRemeberPwd(bool remember);
 
 #endif

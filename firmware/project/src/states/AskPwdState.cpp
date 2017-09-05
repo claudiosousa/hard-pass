@@ -3,7 +3,7 @@
 #include "MasterPwdState.h"
 #include "Sha/sha1.h"
 #include "TFT.h"
-#include "TouchManager.h"
+#include "touch.h"
 #include "colors.h"
 #include "comunication.h"
 #include "sound.h"
@@ -69,7 +69,7 @@ AskPwdState::AskPwdState() {
 
 int AskPwdState::loop() {
     int touch[2];
-    if (!TouchManager_getPoint(touch))
+    if (!touch_getPoint(touch))
         return 0;
 
     for (int i = 0; i < 2; i++) {
