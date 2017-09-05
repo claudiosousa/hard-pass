@@ -31,7 +31,7 @@ void setState(StateName newStateName) {
 }
 
 void statemachine_setup() {
-    setState(MasterPwd);
+    setState(Settings);
 }
 
 void statemachine_loop() {
