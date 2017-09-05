@@ -1,9 +1,9 @@
 #include "stateMachine.h"
-#include "states/AskPwdState.h"
-#include "states/BaseState.h"
-#include "states/MasterPwdState.h"
-#include "states/SettingsState.h"
-#include "states/WaitingState.h"
+#include "BaseState.h"
+#include "askPwd/AskPwdState.h"
+#include "masterPwd/MasterPwdState.h"
+#include "settings/SettingsState.h"
+#include "waiting/WaitingState.h"
 
 typedef enum StateName { MasterPwd = 1, Waiting = 2, AskPwd = 3, Settings = 4 } StateName;
 
@@ -31,7 +31,7 @@ void setState(StateName newStateName) {
 }
 
 void statemachine_setup() {
-    setState(Settings);
+    setState(MasterPwd);
 }
 
 void statemachine_loop() {

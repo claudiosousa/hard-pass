@@ -1,10 +1,10 @@
 #include <Adafruit_GFX.h>
-#include "TFT.h"
-#include "comunication.h"
-#include "sound.h"
-#include "stateMachine.h"
-#include "touch.h"
-#include "states/settings.h"
+#include "communication/communication.h"
+#include "screen/TFT.h"
+#include "screen/touch.h"
+#include "settings/settings.h"
+#include "sound/sound.h"
+#include "stateMachines/stateMachine.h"
 
 void setup() {
     settings_setup();

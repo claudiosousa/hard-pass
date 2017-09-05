@@ -1,8 +1,8 @@
 #ifndef _ASK_PWD_STATE_H
 #define _ASK_PWD_STATE_H
 
-#include "BaseState.h"
-#include "TFT.h"
+#include "stateMachines/BaseState.h"
+#include "screen/TFT.h"
 
 class AskPwdState : public BaseState {
    public:

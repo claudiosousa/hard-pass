@@ -1,7 +1,7 @@
 #include "WaitingState.h"
-#include "TFT.h"
-#include "colors.h"
-#include "comunication.h"
+#include "screen/TFT.h"
+#include "screen/colors.h"
+#include "communication/communication.h"
 
 #define BACKGROUND ANDROID_KB_BG
 #define MESSAGE_BACKGROUND ANDROID_KB_KEY

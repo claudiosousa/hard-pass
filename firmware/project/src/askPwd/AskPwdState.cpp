@@ -1,12 +1,11 @@
 #include "AskPwdState.h"
 #include <string.h>
-#include "MasterPwdState.h"
+#include "communication/communication.h"
+#include "screen/colors.h"
+#include "screen/touch.h"
+#include "sound/sound.h"
 #include "Sha/sha1.h"
-#include "TFT.h"
-#include "touch.h"
-#include "colors.h"
-#include "comunication.h"
-#include "sound.h"
+#include "screen/TFT.h"
 
 #define BACKGROUND ANDROID_KB_BG
 #define MESSAGE_BACKGROUND ANDROID_KB_KEY

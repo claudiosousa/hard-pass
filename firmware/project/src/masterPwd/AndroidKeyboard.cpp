@@ -1,10 +1,10 @@
 #include "AndroidKeyboard.h"
 #include <MCUFRIEND_kbv.h>
 #include <avr/pgmspace.h>
-#include "TFT.h"
-#include "touch.h"
-#include "colors.h"
-#include "sound.h"
+#include "screen/TFT.h"
+#include "screen/colors.h"
+#include "screen/touch.h"
+#include "sound/sound.h"
 
 #define BACKGROUND ANDROID_KB_BG
 #define BUTTON_SHADOW ANDROID_KB_SHADOW
@@ -133,12 +133,10 @@ void drawKeyboard() {
         drawKeyPos(0, -y - 1);
 }
 
-Keyboard::~Keyboard(){
-
+Keyboard::~Keyboard() {
 }
 
 void Keyboard::draw() {
-
     tft.fillScreen(BACKGROUND);
 
     resetText();

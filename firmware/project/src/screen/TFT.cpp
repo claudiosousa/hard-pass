@@ -1,5 +1,5 @@
-#include "TFT.h"
-#include "states/settings.h"
+#include "screen/TFT.h"
+#include "settings/settings.h"
 
 #define MCUFRIEND
 

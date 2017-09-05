@@ -1,8 +1,8 @@
 #ifndef _SETTTING_STATE_H
 #define _SETTTING_STATE_H
 
-#include "BaseState.h"
-#include "TFT.h"
+#include "stateMachines/BaseState.h"
+#include "screen/TFT.h"
 
 class SettingsState : public BaseState {
    public:

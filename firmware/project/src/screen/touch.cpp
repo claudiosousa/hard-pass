@@ -1,8 +1,8 @@
 
+#include "touch.h"
 #include <Arduino.h>
-#include <touch.h>
 #include <TouchScreen.h>
-#include "states/settings.h"
+#include "settings/settings.h"
 
 #define YP A3
 #define XM A2

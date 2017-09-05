@@ -3,7 +3,7 @@
 
 #include <MCUFRIEND_kbv.h>
 #include "AndroidKeyboard.h"
-#include "BaseState.h"
+#include "stateMachines/BaseState.h"
 
 extern char* masterPwd;
 

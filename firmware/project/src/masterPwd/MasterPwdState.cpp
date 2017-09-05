@@ -1,7 +1,7 @@
 #include "MasterPwdState.h"
 #include <Adafruit_GFX.h>
 #include <Arduino.h>
-#include "touch.h"
+#include "screen/touch.h"
 
 char* masterPwd;
 
