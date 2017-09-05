@@ -42,8 +42,8 @@ generatePasswordButton.addEventListener("click", (e) => {
         const variant = document.querySelector("#variant-input").value
         return [activeTab, domain, variant]      
     })
-    .then(([activeTab, domain, variant]) => [activeTab, askHash(domain, variant)])
+    .then(([activeTab, domain, variant]) => Promise.all([activeTab, askHash(domain, variant)]))
     .then(([activeTab, hash]) => [activeTab, hashToPassword(hash)])
-    .then(([activeTab, password]) => browser.tabs.sendMessage(activeTab.id, {password: password}))
+    .then(([activeTab, password]) => browser.tabs.sendMessage(activeTab.id, password))
     .catch(console.log)
 });
