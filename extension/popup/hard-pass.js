@@ -5,8 +5,18 @@ function getTabDomain(tab) {
     return domain
 }
 
+const passwordCharacters = ("abcdefghilklmnopqrstuvwxyz" +
+                            "ABCDEFGHILKLMNOPQRSTUVWXYZ" +
+                            "0123456789!@#$%^&*_+:,.?").split("")
+
 function hashToPassword(hash) {
-    return hash
+    let password = ""
+    for (i=0; i<12; i++) {
+        const hex = "0x" + hash[2*i] + hash[2*i + 1]
+        const characterIndex = parseInt(hex) % passwordCharacters.length
+        password += passwordCharacters[characterIndex] 
+    }
+    return password
 }
 
 function askHash(domain, variant) {
