@@ -12,6 +12,8 @@ MasterPwdState::MasterPwdState() {
 
 int MasterPwdState::loop() {
     masterPwd = kb->processKeys();
+    if (masterPwd == 1)
+        return 4;
     if (masterPwd)
         return 2;  // move to waiting state
 
