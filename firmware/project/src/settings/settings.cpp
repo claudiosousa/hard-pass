@@ -2,7 +2,7 @@
 #include "settings.h"
 #include <EEPROM.h>
 
-int address = 200;
+int address = 400;
 uint8_t config;
 
 void settings_setup() {

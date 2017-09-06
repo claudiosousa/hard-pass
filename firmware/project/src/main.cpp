@@ -6,9 +6,10 @@
 #include "sound/sound.h"
 #include "stateMachines/stateMachine.h"
 
-void setup() {
+void setup()
+{
     settings_setup();
-
+    
     TFT_setup();
     touch_setup();
     communication_setup();
@@ -16,7 +17,8 @@ void setup() {
     sound_setup();
 }
 
-void loop() {
+void loop()
+{
     statemachine_loop();
     sound_loop();
     communication_loop();

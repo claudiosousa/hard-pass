@@ -14,6 +14,7 @@ class SettingsState : public BaseState {
     MCUFRIEND_kbv& tft = buildTFT();
     void drawInitialScreen();
     void drawButton(int button, int text_padding, char * text, uint16_t background);
+    void drawButtons();
 };
 
 #endif
