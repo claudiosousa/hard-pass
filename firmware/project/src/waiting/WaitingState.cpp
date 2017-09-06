@@ -8,7 +8,7 @@
 
 void WaitingState::drawWaitingScreen(){
     tft.fillScreen(BACKGROUND);
-    tft.setCursor(90, 110);
+    tft.setCursor(90, 107);
     tft.setTextColor(WHITE);
     tft.setTextSize(3);
     tft.setTextWrap(false);
@@ -29,10 +29,10 @@ void WaitingState::drawScreenLoop() {
 
     if (counter == 3) {
         counter = 0;
-        tft.fillRect(position_x, 105, 30, 29, BACKGROUND);
+        tft.fillRect(position_x, 102, 30, 29, BACKGROUND);
     }
 
-    tft.drawChar(position_x + counter * 10, 117, '.', WHITE, BACKGROUND, 2);
+    tft.drawChar(position_x + counter * 10, 114, '.', WHITE, BACKGROUND, 2);
     counter++;
 
     time = millis();

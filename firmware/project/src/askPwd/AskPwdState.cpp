@@ -20,16 +20,15 @@ const char *errMsg = "";
 
 void AskPwdState::drawAskPwdStateScreen() {
     tft.fillScreen(BACKGROUND);
-    tft.fillRoundRect(30, 40, 260, 40, 4, MESSAGE_BACKGROUND);
-    tft.setCursor(76, 52);
+    tft.setCursor(30, 35);
     tft.setTextColor(WHITE);
-    tft.setTextSize(2);
+    tft.setTextSize(3);
     tft.setTextWrap(false);
     tft.print("Password asked:");
     int len = strlen(msg);
     int center_position = ((260 - len * 12) / 2) + 30;
-    tft.fillRoundRect(30, 90, 260, 40, 4, MESSAGE_BACKGROUND);
-    tft.setCursor(center_position, 102);
+    tft.fillRoundRect(30, 82, 260, 40, 4, MESSAGE_BACKGROUND);
+    tft.setCursor(center_position, 95);
     tft.setTextColor(ORANGE);
     tft.setTextSize(2);
     tft.setTextWrap(false);
