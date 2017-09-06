@@ -221,8 +221,6 @@ char* Keyboard::processKeys() {
     sound_playTouch();
 
     if (key < 5) {
-        // TODO: handle special keys
-
         switch (key) {
             case 1:  // shift
                 shiftPressed = !shiftPressed;
