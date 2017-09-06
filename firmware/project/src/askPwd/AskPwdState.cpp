@@ -77,6 +77,8 @@ int AskPwdState::loop() {
         if (touch[0] < pos[0] || touch[0] > pos[0] + BUTTONS_SIZE[0] || touch[1] < pos[1] ||
             touch[1] > pos[1] + BUTTONS_SIZE[1])
             continue;
+                    
+        sound_playTouch();
 
         if (i == 1) {  // OK
             uint8_t *hash;
@@ -93,7 +95,7 @@ int AskPwdState::loop() {
             communication_write(errMsg);
 
         communication_clear_read();
-
+        
         if (settings_getRemeberPwd())
             return 2;
         else

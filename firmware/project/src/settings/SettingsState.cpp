@@ -4,6 +4,7 @@
 #include "screen/colors.h"
 #include "screen/touch.h"
 #include "settings/settings.h"
+#include "sound/sound.h"
 
 #define BACKGROUND ANDROID_KB_BG
 #define MESSAGE_BACKGROUND ANDROID_KB_KEY
@@ -82,7 +83,9 @@ int getButtonPress()
 int SettingsState::loop()
 {
     int buttonPress = getButtonPress();
-
+    if (buttonPress != 0)
+        sound_playTouch();
+        
     switch (buttonPress)
     {
     case 0:
