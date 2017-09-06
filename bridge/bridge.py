@@ -16,7 +16,7 @@ class PayloadTooBigException(BaseException):
     pass
 
 auto_port = False
-ser = serial.Serial()
+ser = Serial()
 app = Bottle()
 
 
