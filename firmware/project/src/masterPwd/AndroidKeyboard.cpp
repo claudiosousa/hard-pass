@@ -111,9 +111,16 @@ void drawTextBox() {
                       ANDROID_KB_WHITE);  // Button Shading
 }
 
+void drawTextBoxPlaceholder() {
+    tft.setCursor(KEYBOARD_TB_SIZE[0] + KEYBOARD_TB_TEXT_SPACE[0], KEYBOARD_TB_SIZE[1] + KEYBOARD_TB_TEXT_SPACE[1]);
+    tft.setTextColor(GREY, ANDROID_KB_WHITE);
+    tft.print("Insert master password");
+}
+
 void resetText() {
     for (int i = 0; i < MAX_TEXT_LENGTH; i++)
         enteredText[i] = 0;
+    currentTextLegth = 0;
 }
 
 void drawKeyboard() {
@@ -124,7 +131,6 @@ void drawKeyboard() {
     else
         currentCaps = (char(*)[12])KEYBOARD_LOWER_CAPS;
 
-    tft.setTextSize(2);
     for (int y = 0; y < 3; y++) {
         int characters = pgm_read_byte(&(currentCaps[y][1]));
         for (int x = 0; x < characters; x++)
@@ -140,9 +146,11 @@ Keyboard::~Keyboard() {
 
 void Keyboard::draw() {
     tft.fillScreen(BACKGROUND);
+    tft.setTextSize(2);
 
     resetText();
     drawTextBox();
+    drawTextBoxPlaceholder();
 
     drawKeyboard();
 }
@@ -263,6 +271,9 @@ char* Keyboard::processKeys() {
 
     if (currentTextLegth == MAX_TEXT_LENGTH)
         return NULL;
+
+    if (currentTextLegth == 0)
+        drawTextBox();
 
     tft.setCursor(KEYBOARD_TB_SIZE[0] + KEYBOARD_TB_TEXT_SPACE[0] + currentTextLegth * KEYBOARD_TB_TEXT_SPACE[2],
                   KEYBOARD_TB_SIZE[1] + KEYBOARD_TB_TEXT_SPACE[1]);

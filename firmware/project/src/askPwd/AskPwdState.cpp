@@ -5,6 +5,7 @@
 #include "screen/TFT.h"
 #include "screen/colors.h"
 #include "screen/touch.h"
+#include "settings/settings.h"
 #include "sound/sound.h"
 
 #define BACKGROUND ANDROID_KB_BG
@@ -93,7 +94,10 @@ int AskPwdState::loop() {
 
         communication_clear_read();
 
-        return 2;
+        if (settings_getRemeberPwd())
+            return 2;
+        else
+            return 1;
     }
 
     return 0;
