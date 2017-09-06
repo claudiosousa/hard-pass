@@ -48,6 +48,7 @@ SettingsState::SettingsState() {
 }
 
 int SettingsState::loop() {
+    //return 1 if button OK was pressed
     return 0;
 }
 
