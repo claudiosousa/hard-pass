@@ -1,4 +1,4 @@
-#include "comunication.h"
+#include "communication/communication.h"
 #include <Arduino.h>
 
 void communication_setup() {

@@ -4,5 +4,6 @@ html, body {
 
 #generate-password-button {
   width: 100%;
+  background-color: red;
 }
 

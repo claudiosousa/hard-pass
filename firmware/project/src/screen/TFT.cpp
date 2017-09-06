@@ -1,5 +1,5 @@
-#include "TFT.h"
-#include "states/settings.h"
+#include "screen/TFT.h"
+#include "settings/settings.h"
 
 #define MCUFRIEND
 
@@ -17,7 +17,6 @@ MCUFRIEND_kbv& buildTFT() {
 void TFT_setup() {
     MCUFRIEND_kbv& tft = buildTFT();
     tft.begin(0x9341);
-    settings_setScreenIsRightOrientation(true);
     TFT_updateScreenOrientation();
 }
 

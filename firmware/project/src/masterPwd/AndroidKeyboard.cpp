@@ -1,10 +1,10 @@
 #include "AndroidKeyboard.h"
 #include <MCUFRIEND_kbv.h>
 #include <avr/pgmspace.h>
-#include "TFT.h"
-#include "touch.h"
-#include "colors.h"
-#include "sound.h"
+#include "screen/TFT.h"
+#include "screen/colors.h"
+#include "screen/touch.h"
+#include "sound/sound.h"
 
 #define BACKGROUND ANDROID_KB_BG
 #define BUTTON_SHADOW ANDROID_KB_SHADOW
@@ -36,19 +36,19 @@ bool symbolsPressed = false;
 
 const char KEYBOARD_UPPER_CAPS[3][12] PROGMEM = {
     {0, 10, 'Q', 'W', 'E', 'R', 'T', 'Z', 'U', 'I', 'O', 'P'},
-    {1, 9, 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L'},
+    {0, 10, 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', '*'},
     {3, 7, 'Y', 'X', 'C', 'V', 'B', 'N', 'M'},
 };
 
 const char KEYBOARD_LOWER_CAPS[3][12] PROGMEM = {
     {0, 10, 'q', 'w', 'e', 'r', 't', 'z', 'u', 'i', 'o', 'p'},
-    {1, 9, 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l'},
+    {0, 10, 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', '*'},
     {3, 7, 'y', 'x', 'c', 'v', 'b', 'n', 'm'},
 };
 
 const char KEYBOARD_SYMBOLS_CAPS[3][12] PROGMEM = {
     {0, 10, '1', '2', '3', '4', '5', '6', '7', '8', '9', '0'},
-    {1, 9, '<', '>', '"', '/', '(', ')', '!', '=', '$'},
+    {0, 10, '<', '>', '"', '/', '(', ')', '!', '=', '$', '*'},
     {3, 7, '\\', '+', '-', ';', ',', '.', '_'},
 };
 
@@ -85,6 +85,8 @@ void drawKeyPos(int x, int y, bool active = false) {
         int shiftRight = KEYBOARD_LMARGIN + KEY_OUTER_WIDTH / 2 * pgm_read_byte(&(currentCaps[y][0]));
         char c = char(pgm_read_byte(&(currentCaps[y][x + 2])));
         char s[2] = {c, '\0'};
+        if (x == 9 && y == 1)
+            bg = DARKCYAN;
         drawKey(KEY_OUTER_WIDTH * x + shiftRight, KEYBOARD_TOP + KEY_OUTER_HEIGHT * y, s, KEY_WIDTH, KEY_TEXT_LPADDING,
                 bg);
     } else {
@@ -109,9 +111,16 @@ void drawTextBox() {
                       ANDROID_KB_WHITE);  // Button Shading
 }
 
+void drawTextBoxPlaceholder() {
+    tft.setCursor(KEYBOARD_TB_SIZE[0] + KEYBOARD_TB_TEXT_SPACE[0], KEYBOARD_TB_SIZE[1] + KEYBOARD_TB_TEXT_SPACE[1]);
+    tft.setTextColor(GREY, ANDROID_KB_WHITE);
+    tft.print("Insert master password");
+}
+
 void resetText() {
     for (int i = 0; i < MAX_TEXT_LENGTH; i++)
         enteredText[i] = 0;
+    currentTextLegth = 0;
 }
 
 void drawKeyboard() {
@@ -122,7 +131,6 @@ void drawKeyboard() {
     else
         currentCaps = (char(*)[12])KEYBOARD_LOWER_CAPS;
 
-    tft.setTextSize(2);
     for (int y = 0; y < 3; y++) {
         int characters = pgm_read_byte(&(currentCaps[y][1]));
         for (int x = 0; x < characters; x++)
@@ -133,16 +141,16 @@ void drawKeyboard() {
         drawKeyPos(0, -y - 1);
 }
 
-Keyboard::~Keyboard(){
-
+Keyboard::~Keyboard() {
 }
 
 void Keyboard::draw() {
-
     tft.fillScreen(BACKGROUND);
+    tft.setTextSize(2);
 
     resetText();
     drawTextBox();
+    drawTextBoxPlaceholder();
 
     drawKeyboard();
 }
@@ -221,8 +229,6 @@ char* Keyboard::processKeys() {
     sound_playTouch();
 
     if (key < 5) {
-        // TODO: handle special keys
-
         switch (key) {
             case 1:  // shift
                 shiftPressed = !shiftPressed;
@@ -260,9 +266,15 @@ char* Keyboard::processKeys() {
         }
         return NULL;
     }
+    if (key == '*')
+        return 1;
 
     if (currentTextLegth == MAX_TEXT_LENGTH)
         return NULL;
+
+    if (currentTextLegth == 0)
+        drawTextBox();
+
     tft.setCursor(KEYBOARD_TB_SIZE[0] + KEYBOARD_TB_TEXT_SPACE[0] + currentTextLegth * KEYBOARD_TB_TEXT_SPACE[2],
                   KEYBOARD_TB_SIZE[1] + KEYBOARD_TB_TEXT_SPACE[1]);
     printTbChar('*');

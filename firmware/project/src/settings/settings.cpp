@@ -2,7 +2,7 @@
 #include "settings.h"
 #include <EEPROM.h>
 
-int address = 200;
+int address = 400;
 uint8_t config;
 
 void settings_setup() {
@@ -42,9 +42,9 @@ void settings_setScreenIsRightOrientation(bool rightOrientation) {
 }
 
 bool settings_getRemeberPwd() {
-    return settings_getbit(3);
+    return settings_getbit(0);
 }
 
 void settings_setRemeberPwd(bool remember) {
-    settings_setbit(3, remember);
+    settings_setbit(0, remember);
 }

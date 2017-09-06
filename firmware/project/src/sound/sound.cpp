@@ -1,7 +1,7 @@
 #include "sound.h"
 #include <Arduino.h>
 #include <NewTone.h>
-#include "states/settings.h"
+#include "settings/settings.h"
 
 float gameOverSoundNotes[] = {note_B3, note_F4, note_F4, note_F4, note_E4, note_D4, note_C4, note_E3, note_E3, note_C3};
 int gameOverSoundDurations[] = {162, 162, 162, 162, 217, 217, 217, 162, 162, 162, 162, 162, 5};

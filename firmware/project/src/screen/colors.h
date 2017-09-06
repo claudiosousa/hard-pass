@@ -23,7 +23,7 @@
 #define DARKORANGE 0xDB60  /* 221, 111,   0 */
 #define GREENYELLOW 0xAFE5 /* 173, 255,  47 */
 #define PINK 0xF81F
-#define GREY 0x8888
+#define GREY 0xAD55
 
 #define ANDROID_KB_BG 0x1082          /*  16, 16, 16,*/
 #define ANDROID_KB_SHADOW 0x10A2      /*  22, 22,  22 */

@@ -1,7 +1,7 @@
 #include "MasterPwdState.h"
 #include <Adafruit_GFX.h>
 #include <Arduino.h>
-#include "touch.h"
+#include "screen/touch.h"
 
 char* masterPwd;
 
@@ -12,6 +12,8 @@ MasterPwdState::MasterPwdState() {
 
 int MasterPwdState::loop() {
     masterPwd = kb->processKeys();
+    if (masterPwd == 1)
+        return 4;  // move to settings
     if (masterPwd)
         return 2;  // move to waiting state
 
