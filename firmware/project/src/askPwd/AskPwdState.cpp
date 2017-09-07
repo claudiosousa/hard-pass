@@ -21,10 +21,10 @@ const char *errMsg = "";
 
 void AskPwdState::drawAskPwdStateScreen() {
     tft.fillScreen(BACKGROUND);
-    tft.setCursor(30, 35);
     tft.setTextColor(WHITE);
     tft.setTextSize(3);
     tft.setTextWrap(false);
+    tft.setCursor(30, 35);
     tft.print("Password asked:");
     int len = strlen(domain);
     int center_position = ((260 - len * 12) / 2) + 30;
@@ -32,22 +32,17 @@ void AskPwdState::drawAskPwdStateScreen() {
     tft.setCursor(center_position, 95);
     tft.setTextColor(ORANGE);
     tft.setTextSize(2);
-    tft.setTextWrap(false);
     tft.print(domain);
-
+    
     for (int i = 0; i < 2; i++) {
         int *pos = BUTTONS_POS[i];
         tft.fillRoundRect(pos[0], pos[1], BUTTONS_SIZE[0], BUTTONS_SIZE[1], 3, BUTTONS_COLOR[i]);
-    }
-    tft.setCursor(65, 168);
+    }    
+    
     tft.setTextColor(WHITE);
-    tft.setTextSize(2);
-    tft.setTextWrap(false);
+    tft.setCursor(65, 168);
     tft.print("Cancel");
     tft.setCursor(210, 168);
-    tft.setTextColor(WHITE);
-    tft.setTextSize(2);
-    tft.setTextWrap(false);
     tft.print("Ok");
 }
 
