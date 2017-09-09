@@ -13,7 +13,7 @@
     ],
 
     "browser_action": {
-        "default_icon": "icons/04_32.png",
+        "default_icon": "icons/03_32.png",
         "default_title": "hard-pass",
         "default_popup": "popup/hard-pass.html"
     }
