@@ -40,13 +40,12 @@ void sound_play(Melody* melody) {
     nextNotePos = 0;
 }
 
-float touchNotes[] = {note_C4};
-int touchDurations[] = {130};
+float touchNotes[] = {note_F4};
+int touchDurations[] = {50};
 Melody touchSound = {.length = sizeof(touchNotes) / sizeof(float), .notes = touchNotes, .durations = touchDurations};
 
-float passwordRequestNotes[] = {note_B3, note_F4, note_F4, note_F4, note_E4,
-                                note_D4, note_C4, note_E3, note_E3, note_C3};
-int passwordRequestDurations[] = {162, 162, 162, 162, 217, 217, 217, 162, 162, 162, 162, 162, 5};
+float passwordRequestNotes[] = {note_D5, note_A7, note_D8};
+int passwordRequestDurations[] = {100, 100, 100};
 Melody passwordRequestSound = {.length = sizeof(passwordRequestNotes) / sizeof(float),
                                .notes = passwordRequestNotes,
                                .durations = passwordRequestDurations};
