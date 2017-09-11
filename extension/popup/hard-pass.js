@@ -144,6 +144,7 @@ function hashToPassword(hash, domain) {
     let passwordLength = passwordLengthExceptions[domain] || defaultPasswordLength;
     for (i = 0; i < passwordLength; i++) {
         const hex = "0x" + hash[(2 * i) % hash.length] + hash[(2 * i + 1) % hash.length]
+        const characterIndex = parseInt(hex) % passwordCharacters.length;
         password += passwordCharacters[characterIndex];
     }
     return password;
