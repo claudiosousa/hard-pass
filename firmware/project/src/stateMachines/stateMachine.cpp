@@ -7,10 +7,13 @@
 
 typedef enum StateName { MasterPwd = 1, Waiting = 2, AskPwd = 3, Settings = 4 } StateName;
 
-BaseState* currentState;
+BaseState* currentState = NULL;
 
 void setState(StateName newStateName) {
-    switch (newStateName) {
+    if (currentState != NULL)
+        delete currentState;
+
+        switch (newStateName) {
         case MasterPwd:
             currentState = new MasterPwdState();
             break;
@@ -26,8 +29,6 @@ void setState(StateName newStateName) {
         default:
             break;
     }
-    // deleet causes reboot loop
-    // delete currentState;
 }
 
 void statemachine_setup() {
