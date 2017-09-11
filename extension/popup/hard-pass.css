@@ -1,35 +1,44 @@
 html, body {
-
+  font-family: Helvetica, sans-serif;
+  width: 180px;
+  margin:0;
 }
 
-div {
- height: 30px;
- width: 90px; 
- padding-left: 30px;  
+body> div{
+  margin: 0 8px 8px 8px;
+  font-size: 15px;
+}
+
+#domain {
  font-size: 18px;
  font-weight: bold;
- font-family: Helvetica, sans-serif;
+ margin-top: 8px;
+ text-align: center;
 }
 
-p1, p2 {
+label {
   font-weight : bold;
-  font-family: Helvetica, sans-serif;
 }
 
-#generate-password-button {  
-  width: 150px;
+#generate-password-button {
   height: 50px;
-  border: 3px solid #007738;  
+  border: 3px solid #007738;
   font-weight : bold;
-  font-family: Helvetica, sans-serif;
   font-size: 18px;
   background-color: #8DDC63;
+  width: 100%;
 }
 
-#variant-input {
-  font-family: Helvetica, sans-serif;
+#domain-output{
+  margin-bottom: 8px;
+  display: block;
 }
 
-#domain-output {
-  font-family: Helvetica, sans-serif;
+input, hr{
+  width: 100%;
+  box-sizing: border-box;
+}
+
+input{
+  margin-top: 2px;
 }
