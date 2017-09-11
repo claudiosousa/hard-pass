@@ -8,12 +8,12 @@ div {
  padding-left: 30px;  
  font-size: 18px;
  font-weight: bold;
- font-family: "Century Gothic", Verdana, sans-serif;
+ font-family: Helvetica, sans-serif;
 }
 
 p1, p2 {
   font-weight : bold;
-  font-family: "Century Gothic", Verdana, sans-serif;
+  font-family: Helvetica, sans-serif;
 }
 
 #generate-password-button {  
@@ -21,12 +21,12 @@ p1, p2 {
   height: 50px;
   border: 3px solid #007738;  
   font-weight : bold;
-  font-family: "Century Gothic", Verdana, sans-serif;
+  font-family: Helvetica, sans-serif;
   font-size: 18px;
   background-color: #8DDC63;
 }
 
 #variant-input {
   font-weight : bold;
-  font-family: "Century Gothic", Verdana, sans-serif;
+  font-family: Helvetica, sans-serif;
 }
