@@ -1,0 +1,8 @@
+# IntelliJ
+.idea
+
+# Visual studio code
+.vscode
+
+# Python compiled files
+*.pyc
