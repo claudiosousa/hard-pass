@@ -27,6 +27,9 @@ p1, p2 {
 }
 
 #variant-input {
-  font-weight : bold;
+  font-family: Helvetica, sans-serif;
+}
+
+#domain-output {
   font-family: Helvetica, sans-serif;
 }
