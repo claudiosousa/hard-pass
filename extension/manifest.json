@@ -5,7 +5,7 @@
 
     "description":  "Device-based password manager",
     "icons": {
-        "48": "icons/hard-pass-48.png"
+        "48": "icons/key-icon_48.png"
     },
 
     "permissions": [
@@ -13,7 +13,7 @@
     ],
 
     "browser_action": {
-        "default_icon": "icons/02_32.png",
+        "default_icon": "icons/key-icon_32.png",
         "default_title": "hard-pass",
         "default_popup": "popup/hard-pass.html"
     }

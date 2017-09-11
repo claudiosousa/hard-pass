@@ -7,7 +7,7 @@
 #include "sound/sound.h"
 
 #define BACKGROUND ANDROID_KB_BG
-#define BUTTON_SHADOW ANDROID_KB_SHADOW
+#define BUTTON_SHADOW LIGHTGREY
 #define BUTTON_BORDER ANDROID_KB_SHADOW
 #define BUTTON_BACKGROUND ANDROID_KB_KEY
 #define BUTTON_SPECIAL_BACKGROUND ANDROID_KB_SPECIAL_KEY
@@ -66,8 +66,7 @@ char (*currentCaps)[12];
 MCUFRIEND_kbv& tft = buildTFT();
 
 void drawButton(const int x, const int y, const int w, const int h, int bg) {
-    tft.fillRoundRect(x, y, w, h, 3, BUTTON_SHADOW);  // Button Shading
-    tft.fillRoundRect(x, y, w, h - 2, 3, bg);         // inner button color
+    tft.fillRoundRect(x, y, w, h, 3, bg);         // inner button color
 }
 
 void drawKey(const int x, const int y, const char* c, const int w = KEY_WIDTH, const int lpad = KEY_TEXT_LPADDING,
