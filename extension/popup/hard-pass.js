@@ -163,7 +163,7 @@ function askHash(domain, variant) {
         })
         .then(response => response.json())
         .then(json => {
-            if ('payload' in json) {
+            if ('payload' in json && json.payload) {
                 return json.payload
             } else {
                 throw new Error("No payload found in JSON")
