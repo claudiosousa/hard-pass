@@ -9,10 +9,31 @@ const passwordCharacters = ("abcdefghilklmnopqrstuvwxyz" +
                             "ABCDEFGHILKLMNOPQRSTUVWXYZ" +
                             "0123456789!@#$%^&*_+:,.?").split("")
 
-function hashToPassword(hash) {
+const defaultPasswordLength = 12
+const passwordLengthExceptions = {
+    'google.com': 32,
+    'gmail.com': 32,
+    'youtube.com': 32,
+    'facebook.com': 32,
+    'linkedin.com': 32,
+    'wordpress.com': 32,
+    'postfinance.ch': 32,
+    'ubs.ch': 32,
+    'paypal.com': 20,
+    'bankofamerica.com': 20,
+    'microsoft.com': 16, 
+    'microsoftonline.com': 16, 
+    'outlook.com': 16,
+    'hotmail.com': 16,
+    'live.com': 16,
+    'azure.com': 16,
+}
+
+function hashToPassword(hash, domain) {
     let password = ""
-    for (i=0; i<12; i++) {
-        const hex = "0x" + hash[2*i] + hash[2*i + 1]
+    let passwordLength = passwordLengthExceptions[domain] || defaultPasswordLength;
+    for (i=0; i<passwordLength; i++) {
+        const hex = "0x" + hash[(2*i) % hash.length] + hash[(2*i + 1) % hash.length]
         const characterIndex = parseInt(hex) % passwordCharacters.length
         password += passwordCharacters[characterIndex] 
     }
@@ -52,8 +73,8 @@ generatePasswordButton.addEventListener("click", (e) => {
         const variant = document.querySelector("#variant-input").value
         return [activeTab, domain, variant]      
     })
-    .then(([activeTab, domain, variant]) => Promise.all([activeTab, askHash(domain, variant)]))
-    .then(([activeTab, hash]) => [activeTab, hashToPassword(hash)])
+    .then(([activeTab, domain, variant]) => Promise.all([activeTab, domain, askHash(domain, variant)]))
+    .then(([activeTab, domain, hash]) => [activeTab, hashToPassword(hash, domain)])
     .then(([activeTab, password]) => browser.tabs.sendMessage(activeTab.id, password))
     .catch(console.log)
 });
