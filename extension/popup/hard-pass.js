@@ -1,9 +1,18 @@
+
 function getTabDomain(tab) {
-    const url = new URL(tab.url)
-    const hostname = url.hostname
-    const domain = psl.parse(hostname).domain
-    return domain
+    const url = new URL(tab.url);
+    const hostname = url.hostname;
+    const domain = psl.parse(hostname).domain;
+    return domain;
 }
+
+let domain = browser.tabs.query({ active: true, currentWindow: true })
+    .then(tabs => getTabDomain(tabs[0]))
+    .then(domain => {
+        document.getElementById('domain-output').value = domain;
+        return domain;
+    });
+
 
 const passwordCharacters = ("abcdefghilklmnopqrstuvwxyz" +
                             "ABCDEFGHILKLMNOPQRSTUVWXYZ" +
@@ -34,10 +43,9 @@ function hashToPassword(hash, domain) {
     let passwordLength = passwordLengthExceptions[domain] || defaultPasswordLength;
     for (i=0; i<passwordLength; i++) {
         const hex = "0x" + hash[(2*i) % hash.length] + hash[(2*i + 1) % hash.length]
-        const characterIndex = parseInt(hex) % passwordCharacters.length
-        password += passwordCharacters[characterIndex] 
+        password += passwordCharacters[characterIndex];
     }
-    return password
+    return password;
 }
 
 function askHash(domain, variant) {
@@ -69,9 +77,8 @@ generatePasswordButton.addEventListener("click", (e) => {
     .then(() => browser.tabs.query({active: true, currentWindow: true}))
     .then((tabs) => {
         const activeTab = tabs[0]
-        const domain = getTabDomain(activeTab)
-        const variant = document.querySelector("#variant-input").value
-        return [activeTab, domain, variant]      
+        const variant = document.querySelector("#variant-input").value;
+        return Promise.all([activeTab, domain, variant])
     })
     .then(([activeTab, domain, variant]) => Promise.all([activeTab, domain, askHash(domain, variant)]))
     .then(([activeTab, domain, hash]) => [activeTab, hashToPassword(hash, domain)])

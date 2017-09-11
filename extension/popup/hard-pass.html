@@ -1,24 +1,26 @@
 <!DOCTYPE html>
 
 <html>
-  <head>
-    <meta charset="utf-8">                            
-    <link rel="stylesheet" href="hard-pass.css"/>
-  </head>
-  <body>
-    <div id="domain">Hard-Pass</div>
+
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="hard-pass.css" />
+</head>
+
+<body>
+  <div id="domain">Hard-Pass</div>
+  <div>
     <hr>
-    <p1>Domain:</p1><br>
-    <label for="domain-output"></label>
-    <input type="text" id="domain-output">
-    <br>
-    <p2>Variant:</p2><br>
-    <label for="variant-input"></label>
+    <label for="domain-output">Domain:</label>
+    <input type="text" readonly="readonly" id="domain-output">
+    <label for="variant-input">Variant:</label>
     <input type="text" id="variant-input">
     <hr>
     <button id="generate-password-button">Generate password</button>
-    <script src="browser-polyfill.js"></script>
-    <script src="psl.min.js"></script>
-    <script src="hard-pass.js"></script>
-  </body>
+  </div>
+  <script src="browser-polyfill.js"></script>
+  <script src="psl.min.js"></script>
+  <script src="hard-pass.js"></script>
+</body>
+
 </html>
