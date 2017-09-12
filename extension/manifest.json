@@ -1,7 +1,11 @@
 {
     "manifest_version": 2,
     "name": "hard-pass",
+<<<<<<< HEAD
     "version": "0.6",
+=======
+    "version": "0.5",
+>>>>>>> f853bacdacca9957ac756c1a178cc6442df6fd08
 
     "description":  "Device-based password manager",
     "icons": {
