@@ -80,6 +80,7 @@ def send_payload_to_serial(payload:str) -> str:
     except serial.SerialException:
         reconnect_serial()
 
+
 def parse_args():
     arg_parser = argparse.ArgumentParser(description='Forwards 0 terminated messages between HTTP and serial port')
     arg_parser.add_argument('--serialport', '-s', help='Serial port', metavar='PORT', default="auto", type=str)
