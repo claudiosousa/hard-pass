@@ -9,6 +9,10 @@ body> div{
   font-size: 15px;
 }
 
+form {
+  margin: 5px;
+}
+
 #domain {
  font-size: 18px;
  font-weight: bold;
