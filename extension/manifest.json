@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "hard-pass",
-    "version": "0.3",
+    "version": "0.6",
 
     "description":  "Device-based password manager",
     "icons": {
@@ -16,5 +16,13 @@
         "default_icon": "icons/key-icon_32.png",
         "default_title": "hard-pass",
         "default_popup": "popup/hard-pass.html"
+    },
+
+    "commands": {
+        "_execute_browser_action": {
+            "suggested_key": {
+                "default": "Alt+Shift+P"
+            }
+        }
     }
 }

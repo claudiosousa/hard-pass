@@ -8,15 +8,17 @@
 </head>
 
 <body>
-  <div id="domain">Hard-Pass</div>
-  <div>
-    <hr>
-    <label for="domain-output">Domain:</label>
-    <input type="text" readonly="readonly" id="domain-output">
-    <label for="variant-input">Variant:</label>
-    <input type="text" id="variant-input">
-    <hr>
-    <button id="generate-password-button">Generate password</button>
+  <form id="generate-password-form">
+    <div id="domain">Hard-Pass</div>
+    <div>
+      <hr>
+      <label for="domain-output">Domain:</label>
+      <input type="text" readonly="readonly" id="domain-output">
+      <label for="variant-input">Variant:</label>
+      <input type="text" id="variant-input" autofocus>
+      <hr>
+      <button id="generate-password-button">Generate password</button>
+  </form>
   </div>
   <script src="browser-polyfill.js"></script>
   <script src="psl.min.js"></script>

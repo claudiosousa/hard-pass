@@ -173,8 +173,9 @@ function askHash(domain, variant) {
         })
 }
 
-const generatePasswordButton = document.querySelector("#generate-password-button");
-generatePasswordButton.addEventListener("click", (e) => {
+const generatePasswordForm = document.querySelector("#generate-password-form");
+generatePasswordForm.addEventListener("submit", (e) => {
+    e.preventDefault();
     browser.tabs.executeScript(null, {
             file: '/content_scripts/browser-polyfill.js'
         })
@@ -192,6 +193,9 @@ generatePasswordButton.addEventListener("click", (e) => {
         })
         .then(([activeTab, domain, variant]) => Promise.all([activeTab, domain, askHash(domain, variant)]))
         .then(([activeTab, domain, hash]) => [activeTab, hashToPassword(hash, domain)])
-        .then(([activeTab, password]) => browser.tabs.sendMessage(activeTab.id, password))
+        .then(([activeTab, password]) => {
+            browser.tabs.sendMessage(activeTab.id, password);
+            window.close();
+        })
         .catch(console.log)
 });
