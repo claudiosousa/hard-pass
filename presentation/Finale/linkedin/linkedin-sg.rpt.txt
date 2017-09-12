@@ -1,0 +1,113 @@
+                       _ 
+     StatsGen 0.0.3   | |
+      _ __   __ _  ___| | _
+     | '_ \ / _` |/ __| |/ /
+     | |_) | (_| | (__|   < 
+     | .__/ \__,_|\___|_|\_\
+     | |                    
+     |_| iphelix@thesprawl.org
+
+
+[*] Analyzing passwords in [/admin/hashpass/003-targets/00-linkedin/linkedin.dic]
+[+] Analyzing 100% (5604506/5604506) of passwords
+    NOTE: Statistics below is relative to the number of analyzed passwords, not total number of passwords
+
+[*] Length:
+[+]                         8: 30% (1729523)
+[+]                         9: 17% (985178)
+[+]                        10: 13% (745020)
+[+]                         7: 10% (614951)
+[+]                         6: 10% (563570)
+[+]                        11: 07% (405619)
+[+]                        12: 04% (255191)
+[+]                        13: 02% (133297)
+[+]                        14: 01% (79265)
+[+]                        15: 01% (61669)
+[+]                        16: 00% (26545)
+[+]                        17: 00% (2257)
+[+]                        18: 00% (1184)
+[+]                        19: 00% (558)
+[+]                        20: 00% (296)
+[+]                        21: 00% (136)
+[+]                        22: 00% (90)
+[+]                        24: 00% (51)
+[+]                        23: 00% (40)
+[+]                        25: 00% (17)
+[+]                        26: 00% (10)
+[+]                        27: 00% (10)
+[+]                        30: 00% (7)
+[+]                        28: 00% (4)
+[+]                        36: 00% (4)
+[+]                        29: 00% (3)
+[+]                        54: 00% (3)
+[+]                        32: 00% (2)
+[+]                        33: 00% (2)
+[+]                        34: 00% (2)
+[+]                        40: 00% (1)
+[+]                        48: 00% (1)
+
+[*] Character-set:
+[+]             loweralphanum: 43% (2451525)
+[+]                loweralpha: 20% (1167900)
+[+]             mixedalphanum: 16% (900352)
+[+]                       all: 04% (255559)
+[+]      loweralphaspecialnum: 04% (248949)
+[+]                   numeric: 03% (194568)
+[+]                mixedalpha: 02% (143539)
+[+]         loweralphaspecial: 01% (76835)
+[+]             upperalphanum: 01% (73058)
+[+]         mixedalphaspecial: 00% (37839)
+[+]                upperalpha: 00% (31063)
+[+]      upperalphaspecialnum: 00% (14296)
+[+]                specialnum: 00% (5297)
+[+]         upperalphaspecial: 00% (2695)
+[+]                   special: 00% (1031)
+
+[*] Password complexity:
+[+]                     digit: min(0) max(40)
+[+]                     lower: min(0) max(42)
+[+]                     upper: min(0) max(22)
+[+]                   special: min(0) max(54)
+
+[*] Simple Masks:
+[+]               stringdigit: 38% (2130632)
+[+]                    string: 23% (1342502)
+[+]                 othermask: 10% (600805)
+[+]         stringdigitstring: 10% (598927)
+[+]               digitstring: 04% (228125)
+[+]                     digit: 03% (194568)
+[+]        stringspecialdigit: 02% (154214)
+[+]        stringdigitspecial: 01% (108686)
+[+]          digitstringdigit: 01% (91251)
+[+]       stringspecialstring: 01% (67503)
+[+]             stringspecial: 00% (28154)
+[+]        specialstringdigit: 00% (15471)
+[+]        digitstringspecial: 00% (12983)
+[+]        digitspecialstring: 00% (12256)
+[+]        specialdigitstring: 00% (4839)
+[+]             specialstring: 00% (4771)
+[+]      specialstringspecial: 00% (3620)
+[+]         digitspecialdigit: 00% (1803)
+[+]              digitspecial: 00% (1213)
+[+]                   special: 00% (1031)
+[+]              specialdigit: 00% (778)
+[+]       specialdigitspecial: 00% (374)
+
+[*] Advanced Masks:
+[+]          ?l?l?l?l?l?l?l?l: 04% (247932)
+[+]          ?l?l?l?l?l?l?d?d: 03% (191913)
+[+]        ?l?l?l?l?l?l?l?l?l: 03% (179935)
+[+]              ?l?l?l?l?l?l: 03% (175640)
+[+]      ?l?l?l?l?l?l?l?l?l?l: 02% (158563)
+[+]            ?l?l?l?l?l?l?l: 02% (149567)
+[+]          ?l?l?l?l?d?d?d?d: 01% (107497)
+[+]    ?l?l?l?l?l?l?l?l?l?l?l: 01% (103469)
+[+]          ?l?l?l?l?l?l?l?d: 01% (87642)
+[+]        ?l?l?l?l?l?l?l?d?d: 01% (85959)
+[+]            ?l?l?l?l?l?d?d: 01% (76002)
+[+]              ?d?d?d?d?d?d: 01% (73348)
+[+]        ?l?l?l?l?l?d?d?d?d: 01% (71666)
+[+]  ?l?l?l?l?l?l?l?l?l?l?l?l: 01% (67702)
+[+]          ?l?l?l?l?l?d?d?d: 01% (63866)
+[+]      ?l?l?l?l?l?l?d?d?d?d: 01% (61216)
+[+]      ?l?l?l?l?l?l?l?l?d?d: 01% (59842)
